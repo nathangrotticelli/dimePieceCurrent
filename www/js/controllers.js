@@ -232,7 +232,7 @@ $scope.closeMe = function(){
         function uploadPhoto(imageURI) {
           var options = new FileUploadOptions();
           options.fileKey="file";
-          options.headers = {Connection: "close",'userFullName':name,'username':username,'userEmail':email};
+          options.headers = {Connection: "close",'userfullname':name,'username':username,'useremail':email, 'userpass':password};
           // options.headers = {'headerParam':'headerValue'};
           // options.params = {};
           // options.params.userFullName = name;

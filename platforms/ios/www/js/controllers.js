@@ -230,11 +230,9 @@ $scope.closeMe = function(){
          };
 
         function uploadPhoto(imageURI) {
-          var likes = [];
-          var collections = [];
           var options = new FileUploadOptions();
           options.fileKey="file";
-          options.headers = {Connection: "close",'userFullName':name,'username':username,'userEmail':email,'userLikes':likes,'userCollections':collections};
+          options.headers = {Connection: "close",'userfullname':name,'username':username,'useremail':email, 'userpass':password};
           // options.headers = {'headerParam':'headerValue'};
           // options.params = {};
           // options.params.userFullName = name;

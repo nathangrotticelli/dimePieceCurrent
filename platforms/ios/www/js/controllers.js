@@ -101,12 +101,14 @@ function onSuccess(imageURI) {
    hideSheet();
     PetService.setProfPic(imageURI);
     $scope.profPic = imageURI;
-   $ionicModal.fromTemplateUrl('my-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+    // $scope.modal.hide();
+
+  //  $ionicModal.fromTemplateUrl('my-modal.html', {
+  //   scope: $scope,
+  //   animation: 'slide-in-up'
+  // }).then(function(modal) {
+  //   $scope.modal = modal;
+  // });
 }
 function onFail(message) {
     hideSheet();
@@ -142,7 +144,7 @@ function onFail(message) {
      }
    });
 
-   // cordova.plugins.Keyboard.close();
+
    // $timeout(function() {
      // hideSheet();
    // }, 2000);
@@ -232,7 +234,7 @@ $scope.closeMe = function(){
         function uploadPhoto(imageURI) {
           var options = new FileUploadOptions();
           options.fileKey="file";
-          options.headers = {Connection: "close",'userfullname':name,'username':username,'useremail':email, 'userpass':password};
+          options.headers = {Connection: "close",'userfullname':name,'username':username,'useremail':email,'userpass':password};
           // options.headers = {'headerParam':'headerValue'};
           // options.params = {};
           // options.params.userFullName = name;
@@ -273,6 +275,10 @@ $scope.closeMe = function(){
   //     $scope.openModal = function() {
 
   // };
+  $scope.closeKeyboard = function() {
+    // $scope.modal.hide();
+    cordova.plugins.Keyboard.close();
+  };
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };

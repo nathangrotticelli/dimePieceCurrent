@@ -33,8 +33,8 @@
         <content has-header="true" padding="true">
 
         <ion-scroll scrollbar-y="true" class="list signInContent">
-        <a ng-if="profPic.length==0" class="profSpot ion-image" ng-click="getPhotos()"></a>
-        <img ng-if="profPic.length!=0" class="profSpot2 ion-image" src="{{profPic}}" ng-click="getPhotos()">
+        <a ng-show="profPic.length==0" class="profSpot ion-image" ng-click="getPhotos(); closeKeyboard();"></a>
+        <img ng-show="profPic.length!=0" class="profSpot2 ion-image" src="{{profPic}}" ng-click="getPhotos(); closeKeyboard();">
         <h1></h1>
 
          <label class="item item-input" ><i class="icon ion-person placeholder-icon"></i>
@@ -45,16 +45,19 @@
               <i class="icon ion-at placeholder-icon"></i>
               <input type="text" ng-model="user.username" placeholder="Username">
             </label>
+
              <label class="item item-input">
-              <i class="icon ion-email placeholder-icon"></i><input type="email" ng-model="user.email" placeholder="Email Address">
+              <i class="icon ion-ios7-email placeholder-icon paddLeft"></i><input type="email" ng-model="user.email" placeholder="Email Address">
             </label>
 
+            <form ng-submit="createAccount(user.fullName,user.username,user.email,user.password)">
             <label class="item item-input">
-              <i class="icon ion-locked placeholder-icon"></i>
+              <i class="icon ion-locked placeholder-icon paddLeft"></i>
 
-              <input type="password" ng-model="user.password" placeholder="Password">
-`
+                <input type="password" ng-model="user.password" placeholder="Password">
+
             </label>
+            </form>
 
           <div class="padding" ng-click="createAccount(user.fullName,user.username,user.email,user.password)">
             <p class="text-center">

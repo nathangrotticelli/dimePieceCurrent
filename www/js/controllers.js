@@ -94,39 +94,11 @@ angular.module('sociogram.controllers', ['ionic'])
   })
 
 .controller('BackCtrl', function ($scope,$ionicActionSheet, $ionicModal,  $ionicPlatform, $ionicNavBarDelegate, $ionicScrollDelegate, $ionicPopup, $http, $location, $ionicLoading ,OpenFB, $state, $stateParams, PetService) {
-// $scope.getPhotos = function(){
-//   window.imagePicker.getPictures(
-//       function(results) {
-//           for (var i = 0; i < results.length; i++) {
-//               // alert('Image URI: ' + results[i]);
-//               PetService.setProfPic(results[i]);
-//               // $scope.profPic = "http://i62.tinypic.com/2zznq55.jpg";
-//               $scope.profPic = results[i];
-
-//               $ionicModal.fromTemplateUrl('my-modal.html', {
-//     scope: $scope,
-//     animation: 'slide-in-up'
-//   }).then(function(modal) {
-//     $scope.modal = modal;
-//   });
-
-//               // alert($scope.profPic);
-//               // alert(PetService.getProfPic());
-//           }
-//       }, function (error) {
-//           alert('Error: ' + error);
-//       },{
-//           maximumImagesCount: 1,
-//          allowEdit: true,
-//           quality:100
-//       }
-//   );
-
-// }
 
 $scope.getPhotos = function(){
 
 function onSuccess(imageURI) {
+   hideSheet();
     PetService.setProfPic(imageURI);
     $scope.profPic = imageURI;
    $ionicModal.fromTemplateUrl('my-modal.html', {
@@ -137,11 +109,10 @@ function onSuccess(imageURI) {
   });
 }
 function onFail(message) {
-    alert('Failed because: ' + message);
+    hideSheet();
+    // alert('Failed because: ' + message);
 }
- // Triggered on a button click, or some other target
-cordova.plugins.Keyboard.close();
-   // Show the action sheet
+
    var hideSheet = $ionicActionSheet.show({
      buttons: [
        { text: 'Use camera' },
@@ -154,28 +125,27 @@ cordova.plugins.Keyboard.close();
         },
      buttonClicked: function(index) {
       if(index==0){
-          navigator.camera.getPicture(onSuccess, onFail, { quality: 100,
+          navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
             allowEdit : true,
            targetWidth: 125,
            targetHeight: 125,
-           sourceType : Camera.PictureSourceType.CAMERA,
+           sourceType : Camera.PictureSourceType.CAMERA
           });
       }else{
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 100,
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
             allowEdit : true,
            targetWidth: 125,
            targetHeight: 125,
-           sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+           sourceType : Camera.PictureSourceType.PHOTOLIBRARY
           });
       }
-       return true;
      }
    });
 
-   // For example's sake, hide the sheet after two seconds
-   $timeout(function() {
-     hideSheet();
-   }, 2000);
+   // cordova.plugins.Keyboard.close();
+   // $timeout(function() {
+     // hideSheet();
+   // }, 2000);
 }
 
     $scope.goBack = function(){
@@ -189,22 +159,17 @@ cordova.plugins.Keyboard.close();
           // $ionicNavBarDelegate.showBackButton(false);
           // $scope.main.backBtn = false;
     };
-    $scope.closeMe = function(){
-        // alert('here');
-        // $event.stopPropagation();
-        $ionicNavBarDelegate.back();
+$scope.closeMe = function(){
+    // alert('here');
+    // $event.stopPropagation();
+    $ionicNavBarDelegate.back();
+  };
 
-        // $scope.goBack();
-              // alert($ionicHistory.backView());
-      };
-
-       $scope.joinDimepiece = function(){
-        $scope.modal.show();
-        // cordova.plugins.Keyboard.show();
-
-      };
+   $scope.joinDimepiece = function(){
+    $scope.modal.show();
+  };
        $scope.createAccount = function(name,username,email,password){
-              // alert(window.Keyboard.hideKeyboardAccessoryBar());
+
 //add check for if name is taken
         if(!name){
           navigator.notification.alert(
@@ -248,49 +213,57 @@ cordova.plugins.Keyboard.close();
             "Couldn't Create Account"                 // buttonName
           );
         }
-        else{
-        //      function win(r) {
-        //    // console.log("Code = " + r.responseCode);
-        //     // console.log("Response = " + r.response);
-        //   alert("Response = " + r.response);
-        //   // console.log("Sent = " + r.bytesSent);
-        // }
-        //  function fail(error) {
-        // alert("An error has occurred: Code = " + error.code);
-        // // console.log("upload error source " + error.source);
-        // // console.log("upload error target " + error.target);
-        //  }
-        //   //set upload options
-        // var options = new FileUploadOptions();
-        // options.fileKey = "file";
-        // options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
-        // options.mimeType = "image/jpeg";
-        // var ft = new FileTransfer();
-        // ft.upload(imageURI, encodeURI("http://some.server.com/upload.php"), win, fail, options);
+        else if(PetService.getProfPic().length>0){
 
+         function win(r) {
+           alert("Response = " + r.response);
+          };
 
+         function fail(error) {
+            if(uploadRetry < 5){
+                uploadRetry++;
+                // alert("retry");
+                uploadPhoto(imageURI);
+            } else {
+             alert("An error has occurred: Code = " + error.code);
+            }
+         };
 
-        //    $http.post('http://stark-eyrie-6720.herokuapp.com/createUser',
-        //   {username: username,
-        //   userFullName: name,
-        //   userEmail: email,
-        //   userPassword: password,
-        //   likes: [],
-        //   collections: [],
-        //   userPic: userPic
-        //   }
-        //   ).then(function(){
-        //     alert('worked!');
-        //     $scope.modal.hide();
-        //   });
-
+        function uploadPhoto(imageURI) {
+          var options = new FileUploadOptions();
+          options.fileKey="file";
+          options.headers = {Connection: "close",'userFullName':name,'username':username,'userEmail':email};
+          // options.headers = {'headerParam':'headerValue'};
+          // options.params = {};
+          // options.params.userFullName = name;
+          options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+          options.mimeType="image/jpeg";
+          options.chunkedMode = false;
+          options.httpMethod = 'POST';
+          var uri = encodeURI("http://stark-eyrie-6720.herokuapp.com/createUser");
+          var ft = new FileTransfer();
+          ft.upload(imageURI, uri, win, fail, options, true);
         }
-        // alert(username);
-        // alert(email);
-        // alert(password);
-
-
-
+        var uploadRetry = 0;
+        var imageURI = PetService.getProfPic();
+        uploadPhoto(imageURI);
+        }
+        else{
+          alert('reg send');
+          //  $http.post('http://stark-eyrie-6720.herokuapp.com/createUser',
+          // {username: username,
+          // userFullName: name,
+          // userEmail: email,
+          // userPassword: password,
+          // likes: [],
+          // collections: [],
+          // userPic: userPic
+          // }
+          // ).then(function(){
+          //   alert('worked!');
+          //   $scope.modal.hide();
+          // });
+        }
       };
 
 

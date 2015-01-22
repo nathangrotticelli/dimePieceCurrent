@@ -63,6 +63,14 @@
                         {
                             "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
+                            "count": 1
                         }
                     ],
                     "/widget": []
@@ -125,7 +133,7 @@
                     "MobileCoreServices.framework": [
                         {
                             "xml": "false",
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "UIKit.framework": [],
@@ -163,7 +171,7 @@
                     "AssetsLibrary.framework": [
                         {
                             "xml": "false",
-                            "count": 1
+                            "count": 3
                         }
                     ]
                 }
@@ -223,7 +231,14 @@
         },
         "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.gomobile.bangin"
+        },
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.gomobile.bangin"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.gomobile.bangin"
+        }
+    }
 }

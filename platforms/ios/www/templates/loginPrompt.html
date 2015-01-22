@@ -51,15 +51,14 @@
 
             <label class="item item-input">
               <i class="icon ion-locked placeholder-icon"></i>
-              <form ng-submit="createAccount(user.fullName,user.username,user.email,user.password)">
+
               <input type="password" ng-model="user.password" placeholder="Password">
-              </form>
+`
             </label>
 
-          <div class="padding">
+          <div class="padding" ng-click="createAccount(user.fullName,user.username,user.email,user.password)">
             <p class="text-center">
-
-              <a ng-click="createAccount(user.fullName,user.username,user.email,user.password)" class="createAccount">Create Account</a>
+              <a class="createAccount">Create Account</a>
             </p>
           </div>
 

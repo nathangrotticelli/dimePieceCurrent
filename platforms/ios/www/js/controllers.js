@@ -479,7 +479,85 @@ $scope.goCat = function(link){
       // $scope.main.backBtn = true;
         // $ionicScrollDelegate.scrollTop(false);
     };
+    $scope.getPhotos = function(){
+    function onSuccess(base64string) {
+       hideSheet();
+         PetService.setProfPic(base64string);
+        $scope.user.userPic = base64string;
+         PetService.setUser($scope.user);
+          $http.post('http://stark-eyrie-6720.herokuapp.com/picUpdate',
+               {
+                  username: $scope.user.username,
+                  userPic: $scope.user.userPic
+                });
+    }
+     function onFail(message) {
+        hideSheet();
+        alert('Failed because: ' + message);
+     }
 
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: 'Use camera' },
+       { text: 'Choose from photo roll' }
+     ],
+     titleText: null,
+     cancelText: '<b>Cancel</b>',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+      if(index==0){
+          navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
+            allowEdit : true,
+           targetWidth: 75,
+           targetHeight: 75,
+           destinationType: Camera.DestinationType.DATA_URL,
+           encodingType: Camera.EncodingType.JPEG,
+           sourceType : Camera.PictureSourceType.CAMERA
+          });
+      }else{
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
+            allowEdit : true,
+           targetWidth: 75,
+           targetHeight: 75,
+           destinationType: Camera.DestinationType.DATA_URL,
+           encodingType: Camera.EncodingType.JPEG,
+           sourceType : Camera.PictureSourceType.PHOTOLIBRARY
+          });
+      }
+     }
+   });
+}
+    $scope.logUserOut= function() {
+      PetService.setUser(false);
+      PetService.setUserPic("");
+      $state.go('app.login');
+    };
+
+  $scope.settingProf = function(){
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: '<div class="logOut">Log Out</div>' },
+       {  text: 'Change Photo'}
+     ],
+     titleText: null,
+     cancelText: '<b>Cancel</b>',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+      if(index==0){
+          hideSheet();
+          $scope.logUserOut();
+          // alert('log out');
+      }else{
+        hideSheet();
+        $scope.getPhotos();
+     }
+    }
+    })
+   }
 
       // window.StatusBar.backgroundColorByName("red");
 
@@ -524,115 +602,17 @@ $scope.goCat = function(link){
       navigator.splashscreen.hide();
     }, 1000);
 
-    // $scope.noPop='false';
-    // queryGo=false;
-      // $scope.main.dragContent = false;
-      // $scope.main.tabs = true;
-      // $scope.main.tabs = PetService.getTabs();
-      // $scope.main.backBtn = PetService.getBack();
-
-      // PetService.setTabs(true);
-       // PetService.setBack(false);
-      // $ionicScrollDelegate.scrollTop(false);
-     // $scope.singleView = PetService.getSingleView();
      $scope.singleWatch = PetService.getSingle();
-
       $scope.singleShopWatch = PetService.getSingle();
 
-    // if(PetService.getEvents2().length<1){
-      // $scope.getWatches();
-    // }
-    // else{
     if(PetService.getWatchList().length==0){
       $scope.getWatches();
     }
     $scope.watchList = PetService.getWatchList();
     $scope.shopCatList = PetService.getCatList();
-     $scope.user = PetService.getUser();
-
-$scope.getPhotos = function(){
-    function onSuccess(base64string) {
-       hideSheet();
-        PetService.setProfPic(base64string);
-        $scope.user.userPic = base64string;
-          $http.post('http://stark-eyrie-6720.herokuapp.com/picUpdate',
-               {
-                  username: $scope.user.username,
-                  userPic: $scope.user.userPic
-                });
-          // $ionicActionSheet.hide()
-    }
-     function onFail(message) {
-      alert('fail');
-        hideSheet();
-        // alert('Failed because: ' + message);
-     }
-
-   var hideSheet = $ionicActionSheet.show({
-     buttons: [
-       { text: 'Use camera' },
-       { text: 'Choose from photo roll' }
-     ],
-     titleText: null,
-     cancelText: '<b>Cancel</b>',
-     cancel: function() {
-          // add cancel code..
-        },
-     buttonClicked: function(index) {
-      if(index==0){
-          navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
-            allowEdit : true,
-           targetWidth: 75,
-           targetHeight: 75,
-           destinationType: Camera.DestinationType.DATA_URL,
-           encodingType: Camera.EncodingType.JPEG,
-           sourceType : Camera.PictureSourceType.CAMERA
-          });
-      }else{
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
-            allowEdit : true,
-           targetWidth: 75,
-           targetHeight: 75,
-           destinationType: Camera.DestinationType.DATA_URL,
-           encodingType: Camera.EncodingType.JPEG,
-           sourceType : Camera.PictureSourceType.PHOTOLIBRARY
-          });
-      }
-     }
-   });
-// $scope.closeKeyboard();
-}
-  $scope.settingProf = function(){
-
-   var hideSheet = $ionicActionSheet.show({
-     buttons: [
-       { text: '<div class="logOut">Log Out</div>' },
-       {  text: 'Change Photo'}
-     ],
-     titleText: null,
-     cancelText: '<b>Cancel</b>',
-     cancel: function() {
-          // add cancel code..
-        },
-     buttonClicked: function(index) {
-      if(index==0){
-          hideSheet();
-          alert('log out');
-      }else{
-        hideSheet();
-        $scope.getPhotos();
-     }
-    }
-    })
+    $scope.user = PetService.getUser();
 
 
-       // if($scope.toggle=='left'){
-       //  $scope.toggle='right';
-       // }else{
-       //   $scope.toggle='left';
-       // }
-      // alert($scope.toggle);
-     }
     // }
     // $scope.doThis2=function(){
     //   // $scope.showAlert("Connection to the server could not be acheived at this time. Increase your WiFi/service or try again later.","Failed.");

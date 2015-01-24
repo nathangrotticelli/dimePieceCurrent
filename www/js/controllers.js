@@ -482,8 +482,9 @@ $scope.goCat = function(link){
     $scope.getPhotos = function(){
     function onSuccess(base64string) {
        hideSheet();
-        PetService.setProfPic(base64string);
+         PetService.setProfPic(base64string);
         $scope.user.userPic = base64string;
+         PetService.setUser($scope.user);
           $http.post('http://stark-eyrie-6720.herokuapp.com/picUpdate',
                {
                   username: $scope.user.username,
@@ -528,6 +529,12 @@ $scope.goCat = function(link){
      }
    });
 }
+    $scope.logUserOut= function() {
+      PetService.setUser(false);
+      PetService.setUserPic("");
+      $state.go('app.login');
+    };
+
   $scope.settingProf = function(){
    var hideSheet = $ionicActionSheet.show({
      buttons: [
@@ -542,7 +549,8 @@ $scope.goCat = function(link){
      buttonClicked: function(index) {
       if(index==0){
           hideSheet();
-          alert('log out');
+          $scope.logUserOut();
+          // alert('log out');
       }else{
         hideSheet();
         $scope.getPhotos();
@@ -550,18 +558,6 @@ $scope.goCat = function(link){
     }
     })
    }
-
-
-      // window.StatusBar.backgroundColorByName("red");
-
-    // $cordovaStatusbar.overlaysWebView(true);
-
-  // $cordovaStatusBar.style(1); //Light
-
-     // $scope.events2 = [];
-
-
-
 
      $scope.expandPrice= function(event) {
      event.showPrice = !event.showPrice;

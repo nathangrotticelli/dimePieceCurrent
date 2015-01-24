@@ -96,24 +96,17 @@ angular.module('sociogram.controllers', ['ionic'])
 .controller('BackCtrl', function ($scope,$ionicActionSheet, $ionicModal,  $ionicPlatform, $ionicNavBarDelegate, $ionicScrollDelegate, $ionicPopup, $http, $location, $ionicLoading ,OpenFB, $state, $stateParams, PetService) {
 
 $scope.getPhotos = function(){
+    $scope.closeKeyboard();
 
 function onSuccess(imageURI) {
    hideSheet();
     PetService.setProfPic(imageURI);
     $scope.profPic = imageURI;
-    // $scope.modal.hide();
-
-  //  $ionicModal.fromTemplateUrl('my-modal.html', {
-  //   scope: $scope,
-  //   animation: 'slide-in-up'
-  // }).then(function(modal) {
-  //   $scope.modal = modal;
-  // });
 }
-function onFail(message) {
-    hideSheet();
-    // alert('Failed because: ' + message);
-}
+   function onFail(message) {
+      hideSheet();
+      // alert('Failed because: ' + message);
+   }
 
    var hideSheet = $ionicActionSheet.show({
      buttons: [
@@ -131,6 +124,8 @@ function onFail(message) {
             allowEdit : true,
            targetWidth: 125,
            targetHeight: 125,
+           destinationType: Camera.DestinationType.DATA_URL,
+           encodingType: Camera.EncodingType.JPEG,
            sourceType : Camera.PictureSourceType.CAMERA
           });
       }else{
@@ -138,6 +133,8 @@ function onFail(message) {
             allowEdit : true,
            targetWidth: 125,
            targetHeight: 125,
+           destinationType: Camera.DestinationType.DATA_URL,
+           encodingType: Camera.EncodingType.JPEG,
            sourceType : Camera.PictureSourceType.PHOTOLIBRARY
           });
       }
@@ -145,10 +142,23 @@ function onFail(message) {
    });
 
 
-   // $timeout(function() {
-     // hideSheet();
-   // }, 2000);
+   $timeout(function() {
+     $scope.closeKeyboard();
+   }, 2000);
 }
+
+    $scope.getPic = function(){
+      $http.post('http://stark-eyrie-6720.herokuapp.com/picGet',
+          {testInfo: 'testInfo recieved'}).error(function(err){
+            // alert(err);
+            $scope.showAlert("Internet connection could not be acheived at this time. Try again later.",null);
+          }).then(function(res2){
+              $scope.profPic=res2.data.imageData;
+              PetService.setProfPic(res2.data.imageData);
+               // alert($scope.profPic);
+          });
+        };
+
 
     $scope.goBack = function(){
          // PetService.setSingleView(false);
@@ -175,9 +185,9 @@ $scope.closeMe = function(){
 //add check for if name is taken
         if(!name){
           navigator.notification.alert(
-            "Full name can't be blank.",  // message
+            "Full name can't be blank.",
             null,         // callback
-            "Couldn't Create Account"                 // buttonName
+            "Couldn't Create Account"
           );
         }
         else if(name.length<2){
@@ -215,56 +225,31 @@ $scope.closeMe = function(){
             "Couldn't Create Account"                 // buttonName
           );
         }
-        else if(PetService.getProfPic().length>0){
-
-         function win(r) {
-           alert("Response = " + r.response);
-          };
-
-         function fail(error) {
-            if(uploadRetry < 5){
-                uploadRetry++;
-                // alert("retry");
-                uploadPhoto(imageURI);
-            } else {
-             alert("An error has occurred: Code = " + error.code);
-            }
-         };
-
-        function uploadPhoto(imageURI) {
-          var options = new FileUploadOptions();
-          options.fileKey="file";
-          options.headers = {Connection: "close",'userfullname':name,'username':username,'useremail':email,'userpass':password};
-          // options.headers = {'headerParam':'headerValue'};
-          // options.params = {};
-          // options.params.userFullName = name;
-          options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-          options.mimeType="image/jpeg";
-          options.chunkedMode = false;
-          options.httpMethod = 'POST';
-          var uri = encodeURI("http://stark-eyrie-6720.herokuapp.com/createUser");
-          var ft = new FileTransfer();
-          ft.upload(imageURI, uri, win, fail, options, true);
-        }
-        var uploadRetry = 0;
-        var imageURI = PetService.getProfPic();
-        uploadPhoto(imageURI);
-        }
         else{
-          alert('reg send');
-          //  $http.post('http://stark-eyrie-6720.herokuapp.com/createUser',
-          // {username: username,
-          // userFullName: name,
-          // userEmail: email,
-          // userPassword: password,
-          // likes: [],
-          // collections: [],
-          // userPic: userPic
-          // }
-          // ).then(function(){
-          //   alert('worked!');
-          //   $scope.modal.hide();
-          // });
+          function uploadPhoto(imageURI) {
+            $http.post('http://stark-eyrie-6720.herokuapp.com/createUser',
+            {username: username,
+            userFullName: name,
+            userEmail: email,
+            userPass: password,
+            userPic: imageURI
+            }
+            ).success(function(){
+              // alert('success');
+            }).error(function(){
+              if(uploadRetry < 3){
+                    uploadRetry++;
+                    // alert("retry");
+                    uploadPhoto(imageURI);
+                } else {
+                 alert("An error has occurred: Code = " + error.code);
+                }
+              })
+           }
+
+            var uploadRetry = 0;
+            var imageURI = PetService.getProfPic();
+            uploadPhoto(imageURI);
         }
       };
 
@@ -302,8 +287,7 @@ $ionicModal.fromTemplateUrl('my-modal.html', {
   }).then(function(modal) {
     $scope.modal = modal;
   });
-
-  $scope.profPic = PetService.getProfPic();
+$scope.profPic = PetService.getProfPic();
   // alert($scope.profPic.length);
 
 

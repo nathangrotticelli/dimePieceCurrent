@@ -34,7 +34,7 @@
 
         <ion-scroll scrollbar-y="true" class="list signInContent">
         <a ng-show="profPic.length==0" class="profSpot ion-image" ng-click="getPhotos(); closeKeyboard();"></a>
-        <img ng-show="profPic.length!=0" class="profSpot2 ion-image" src="{{profPic}}" ng-click="getPhotos(); closeKeyboard();">
+        <img ng-show="profPic.length!=0" class="profSpot2 ion-image" ng-src="data:image/jpg;base64,{{profPic}}" ng-click="getPhotos(); closeKeyboard();">
         <h1></h1>
 
          <label class="item item-input" ><i class="icon ion-person placeholder-icon"></i>

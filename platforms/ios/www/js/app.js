@@ -31,9 +31,9 @@ angular.module('sociogram', ['ionic', 'openfb','objectFilters','sociogram.contro
                 // alert($cordovaStatusBar);
                 // $cordovaStatusBar.style(1);
                 // StatusBar.backgroundColorByName("green");
-                StatusBar.overlaysWebView(true);
+                // StatusBar.overlaysWebView(true);
                 // StatusBar.styleLightContent();
-                StatusBar.styleDefault();
+                // StatusBar.styleDefault();
             }
 // && toState.name !== "app.logout"
         });
@@ -131,9 +131,9 @@ angular.module('sociogram', ['ionic', 'openfb','objectFilters','sociogram.contro
             .state('app.profile', {
                 url: "/profile",
                 views: {
-                    'login': {
+                    'profile': {
                         templateUrl: "templates/profile.html",
-                        controller: "ProfileCtrl"
+                        controller: "LoginCtrl"
                     }
                 }
             })
@@ -142,15 +142,6 @@ angular.module('sociogram', ['ionic', 'openfb','objectFilters','sociogram.contro
                       views: {
                         'login': {
                           templateUrl: 'templates/about.html',
-                          controller: 'LoginCtrl'
-                        }
-                      }
-                    })
-                    .state('app.login2', {
-                      url: '/login2',
-                      views: {
-                        'login': {
-                          templateUrl: 'templates/login2.html',
                           controller: 'LoginCtrl'
                         }
                       }

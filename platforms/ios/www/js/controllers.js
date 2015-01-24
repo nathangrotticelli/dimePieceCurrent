@@ -14,6 +14,56 @@ angular.module('sociogram.controllers', ['ionic'])
           return false;
         }
     }
+     $scope.user =function(){
+      return PetService.getUser();
+     };
+
+     // var themeSelectors = ".tab-item .ion-ios7-paper-outline";
+      // var declarations = {};
+      // declarations["font-size"] = 99;
+
+
+     // $scope.addCSS = function(selectors, declarations){
+         // var themeSelectors = ".tab-item .ion-ios7-paper-outline";
+         //  var declarations = {};
+         //  declarations["background-color"] = "red";
+       // return function(selectors, declarations) {
+        // var declarationString = "";
+        // angular.forEach(declarations, function(value, key) {
+        //     declarationString += key + ":" + value + " !important;"
+        // });
+
+        // if (declarationString != "") {
+        //     var sheet = document.createElement('style');
+        //     sheet.innerHTML = selectors + " {" + declarationString + "}";
+        //     document.body.appendChild(sheet);
+        // }
+        // return selectors
+    // };
+     // }
+    //    $scope.addCSS = function(selectors, declarations){
+    //      // var themeSelectors = ".tab-item .ion-ios7-paper-outline";
+    //      //  var declarations = {};
+    //      //  declarations["background-color"] = "red";
+    //    // return function(selectors, declarations) {
+    //     // var declarationString = "";
+    //     // angular.forEach(declarations, function(value, key) {
+    //     //     declarationString += key + ":" + value + " !important;"
+    //     // });
+
+    //     // if (declarationString != "") {
+    //         var sheet = document.createElement('style');
+    //         sheet.innerHTML = selectors + " {font-size:99!important}";
+    //         document.body.appendChild(sheet);
+    //     // }
+    //     // return selectors
+    // // };
+    //  }
+
+      // $scope.addCSS(themeSelectors, declarations);
+
+    // addCSS = (themeSelectors, declarations);
+
       // $scope.main.dragContent = true;
       // $scope.main.backBtn = false;
 
@@ -166,8 +216,6 @@ $scope.closeKeyboard();
           // $scope.main.backBtn = false;
     };
 $scope.closeMe = function(){
-    // alert('here');
-    // $event.stopPropagation();
     $ionicNavBarDelegate.back();
   };
 
@@ -224,7 +272,10 @@ $scope.closeMe = function(){
             userEmail: email,
             userPass: password,
             userPic: $scope.profPic
-            }).success(function(){
+            }).then(function(res3){
+              // alert(res3.data.user);
+              // alert(res.user);
+               PetService.setUser(res3.data.user);
               $scope.modal.remove();
                $location.path('/app/login');
               // alert('success' );
@@ -268,7 +319,8 @@ $scope.closeMe = function(){
     }).then(function(modal) {
       $scope.modal = modal;
     });
-  }
+  };
+
   $scope.joinDimepiece = function(){
     if(!$scope.modal){
       $scope.startModal();
@@ -289,6 +341,7 @@ $scope.profPic = PetService.getProfPic();
   .controller('LoginCtrl', function ($scope, $ionicPlatform, $ionicNavBarDelegate, $ionicScrollDelegate, $ionicPopup, $http, $location, $ionicLoading ,OpenFB, $state, $stateParams, PetService) {
     // $scope.main = {};
     // alert(window.StatusBar);
+
 $scope.goAmazon = function(link){
   window.open(link,"_system");
 };
@@ -495,6 +548,7 @@ $scope.goCat = function(link){
     }
     $scope.watchList = PetService.getWatchList();
     $scope.shopCatList = PetService.getCatList();
+     $scope.user = PetService.getUser();
     // }
     // $scope.doThis2=function(){
     //   // $scope.showAlert("Connection to the server could not be acheived at this time. Increase your WiFi/service or try again later.","Failed.");

@@ -14,18 +14,13 @@
     <ion-nav-view name="shop"></ion-nav-view>
   </ion-tab>
 
-
-   <ion-tab icon-off="ion-person middleTab" icon-on="ion-ios7-person middleTab activeTab" href="#/app/loginPrompt">
+     <ion-tab icon-off="ion-person middleTab" ng-if="!user()" href="#/app/loginPrompt">
     <ion-nav-view name="loginPrompt"></ion-nav-view>
   </ion-tab>
 
+   <ion-tab icon-off="ion-person middleTab" icon-on="ion-person middleTab activeTab" ng-if="user()" href="#/app/profile">
+    <ion-nav-view name="profile"></ion-nav-view>
+  </ion-tab>
 
 
-
-  <!-- Friends Tab -->
-<!--   <ion-tab title="Friends" icon-off="ion-ios7-heart-outline" icon-on="ion-ios7-heart" href="#/tab/friends">
-    <ion-nav-view name="tab-friends"></ion-nav-view>
-  </ion-tab> -->
-
-<!-- </div> -->
 </ion-tabs>

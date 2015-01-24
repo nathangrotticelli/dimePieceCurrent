@@ -96,17 +96,15 @@ angular.module('sociogram.controllers', ['ionic'])
 .controller('BackCtrl', function ($scope,$ionicActionSheet, $ionicModal,  $ionicPlatform, $ionicNavBarDelegate, $ionicScrollDelegate, $ionicPopup, $http, $location, $ionicLoading ,OpenFB, $state, $stateParams, PetService) {
 
 $scope.getPhotos = function(){
-    $scope.closeKeyboard();
-
-function onSuccess(imageURI) {
-   hideSheet();
-    PetService.setProfPic(imageURI);
-    $scope.profPic = imageURI;
-}
-   function onFail(message) {
-      hideSheet();
-      // alert('Failed because: ' + message);
-   }
+    function onSuccess(base64string) {
+       hideSheet();
+        PetService.setProfPic(base64string);
+        $scope.profPic = base64string;
+    }
+     function onFail(message) {
+        hideSheet();
+        // alert('Failed because: ' + message);
+     }
 
    var hideSheet = $ionicActionSheet.show({
      buttons: [
@@ -140,11 +138,7 @@ function onSuccess(imageURI) {
       }
      }
    });
-
-
-   $timeout(function() {
-     $scope.closeKeyboard();
-   }, 2000);
+$scope.closeKeyboard();
 }
 
     $scope.getPic = function(){
@@ -177,9 +171,6 @@ $scope.closeMe = function(){
     $ionicNavBarDelegate.back();
   };
 
-   $scope.joinDimepiece = function(){
-    $scope.modal.show();
-  };
        $scope.createAccount = function(name,username,email,password){
 
 //add check for if name is taken
@@ -226,40 +217,29 @@ $scope.closeMe = function(){
           );
         }
         else{
-          function uploadPhoto(imageURI) {
+          // $scope.uploadPhoto = function(imageURI,username,name,email,password) {}
             $http.post('http://stark-eyrie-6720.herokuapp.com/createUser',
             {username: username,
             userFullName: name,
             userEmail: email,
             userPass: password,
-            userPic: imageURI
-            }
-            ).success(function(){
-              // alert('success');
+            userPic: $scope.profPic
+            }).success(function(){
+              $scope.modal.remove();
+               $location.path('/app/login');
+              // alert('success' );
             }).error(function(){
               if(uploadRetry < 3){
                     uploadRetry++;
                     // alert("retry");
-                    uploadPhoto(imageURI);
+                     $scope.createAccount(name,username,email,password);
                 } else {
                  alert("An error has occurred: Code = " + error.code);
                 }
               })
-           }
-
-            var uploadRetry = 0;
-            var imageURI = PetService.getProfPic();
-            uploadPhoto(imageURI);
         }
       };
 
-
-
-
-
-  //     $scope.openModal = function() {
-
-  // };
   $scope.closeKeyboard = function() {
     // $scope.modal.hide();
     cordova.plugins.Keyboard.close();
@@ -280,14 +260,27 @@ $scope.closeMe = function(){
     // Execute action
   });
 
-$ionicModal.fromTemplateUrl('my-modal.html', {
+  $scope.startModal = function(){
+    $ionicModal.fromTemplateUrl('my-modal.html', {
     scope: $scope,
     animation: 'slide-in-up',
     focusFirstInput: true
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+  }
+  $scope.joinDimepiece = function(){
+    if(!$scope.modal){
+      $scope.startModal();
+    }
+    else{
+      $scope.modal.show();
+    }
+  };
+
+
 $scope.profPic = PetService.getProfPic();
+ var uploadRetry = 0;
   // alert($scope.profPic.length);
 
 
@@ -409,7 +402,7 @@ $scope.goCat = function(link){
     }
     else{
       // PetService.setBack(false);
-        StatusBar.styleLightContent();
+        // StatusBar.styleLightContent();
       $location.path('/app/login');
     }
 

@@ -1,0 +1,20 @@
+
+<ion-view hide-back-button="true" hide-nav-bar="true" >
+     <ion-content scroll="true" scrollbar-y="true" padding="false" class="">
+
+
+        <a ng-show="user.userPic.length==0" class="profSpot ion-image"></a>
+        <img ng-show="user.userPic.length>0" class="profSpot2 ion-image" ng-src="data:image/jpg;base64,{{user.userPic}}">
+        <h1></h1>
+
+         <label class="item item-input" >
+          <i class="icon ion-person placeholder-icon"></i>
+         <input type="text" ng-model="user.fullName" placeholder="Full Name" >
+         </label>
+
+
+
+
+
+ </ion-content>
+</ion-view>

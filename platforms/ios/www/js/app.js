@@ -31,9 +31,9 @@ angular.module('sociogram', ['ionic', 'openfb','objectFilters','sociogram.contro
                 // alert($cordovaStatusBar);
                 // $cordovaStatusBar.style(1);
                 // StatusBar.backgroundColorByName("green");
-                // StatusBar.overlaysWebView(true);
+                StatusBar.overlaysWebView(true);
                 // StatusBar.styleLightContent();
-                // StatusBar.styleDefault();
+                StatusBar.styleDefault();
             }
 // && toState.name !== "app.logout"
         });

@@ -1,19 +1,35 @@
 
 <ion-view hide-back-button="true" hide-nav-bar="true" >
-     <ion-content scroll="true" scrollbar-y="true" padding="false" class="">
+     <ion-content scroll="true" scrollbar-y="true" class="">
 
 
-        <a ng-show="user.userPic.length==0" class="profSpot ion-image"></a>
-        <img ng-show="user.userPic.length>0" class="profSpot2 ion-image" ng-src="data:image/jpg;base64,{{user.userPic}}">
-        <h1></h1>
+
+   <a class="topProfile" ng-click="settingProf()">
+    <i class=" ion-gear-a" ng-click="settingProf()"></i>
+  </a>
+  <div class="profileBody">
+        <img ng-show="user.userPic.length==0" class="profSpot ion-image">
+        <img ng-show="user.userPic.length>0" class="profImg ion-image" ng-src="data:image/jpg;base64,{{user.userPic}}">
+
+          <h2 class="profileName">{{user.userFullName}}</h2>
+        <h2 class="profileUsername">@{{user.username}}</h2>
+
+        <div class="profileBtns" ng-init="$scope.toggle=true">
+          <div ng-if="$scope.toggle==true" class="profBtn1 leftTog">{{user.likes.length}} likes</div>
+            <div ng-if="$scope.toggle==true" ng-click="$scope.toggle=!$scope.toggle" class="profBtn2 rightTog">{{user.collections.length}} collections
+            </div>
+
+             <div ng-if="$scope.toggle==false" ng-click="$scope.toggle=!$scope.toggle" class="profBtn2 leftTog">{{user.likes.length}} likes</div>
+           <div ng-if="$scope.toggle==false"  class="profBtn1 rightTog">{{user.collections.length}} collections
+           </div>
+
+         </div>
 
          <label class="item item-input" >
           <i class="icon ion-person placeholder-icon"></i>
-         <input type="text" ng-model="user.fullName" placeholder="Full Name" >
+         <input type="text" placeholder="Full Name" >
          </label>
-
-
-
+</div>
 
 
  </ion-content>

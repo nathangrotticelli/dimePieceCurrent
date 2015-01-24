@@ -338,7 +338,7 @@ $scope.profPic = PetService.getProfPic();
 
   }) // end of back controller
 
-  .controller('LoginCtrl', function ($scope, $ionicPlatform, $ionicNavBarDelegate, $ionicScrollDelegate, $ionicPopup, $http, $location, $ionicLoading ,OpenFB, $state, $stateParams, PetService) {
+  .controller('LoginCtrl', function ($scope, $ionicPlatform, $ionicActionSheet, $ionicNavBarDelegate, $ionicScrollDelegate, $ionicPopup, $http, $location, $ionicLoading ,OpenFB, $state, $stateParams, PetService) {
     // $scope.main = {};
     // alert(window.StatusBar);
 
@@ -522,7 +522,7 @@ $scope.goCat = function(link){
 
     setTimeout(function() {
       navigator.splashscreen.hide();
-    }, 500);
+    }, 1000);
 
     // $scope.noPop='false';
     // queryGo=false;
@@ -549,6 +549,90 @@ $scope.goCat = function(link){
     $scope.watchList = PetService.getWatchList();
     $scope.shopCatList = PetService.getCatList();
      $scope.user = PetService.getUser();
+
+$scope.getPhotos = function(){
+    function onSuccess(base64string) {
+       hideSheet();
+        PetService.setProfPic(base64string);
+        $scope.user.userPic = base64string;
+          $http.post('http://stark-eyrie-6720.herokuapp.com/picUpdate',
+               {
+                  username: $scope.user.username,
+                  userPic: $scope.user.userPic
+                });
+          // $ionicActionSheet.hide()
+    }
+     function onFail(message) {
+      alert('fail');
+        hideSheet();
+        // alert('Failed because: ' + message);
+     }
+
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: 'Use camera' },
+       { text: 'Choose from photo roll' }
+     ],
+     titleText: null,
+     cancelText: '<b>Cancel</b>',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+      if(index==0){
+          navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
+            allowEdit : true,
+           targetWidth: 75,
+           targetHeight: 75,
+           destinationType: Camera.DestinationType.DATA_URL,
+           encodingType: Camera.EncodingType.JPEG,
+           sourceType : Camera.PictureSourceType.CAMERA
+          });
+      }else{
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 85,
+            allowEdit : true,
+           targetWidth: 75,
+           targetHeight: 75,
+           destinationType: Camera.DestinationType.DATA_URL,
+           encodingType: Camera.EncodingType.JPEG,
+           sourceType : Camera.PictureSourceType.PHOTOLIBRARY
+          });
+      }
+     }
+   });
+// $scope.closeKeyboard();
+}
+  $scope.settingProf = function(){
+
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: '<div class="logOut">Log Out</div>' },
+       {  text: 'Change Photo'}
+     ],
+     titleText: null,
+     cancelText: '<b>Cancel</b>',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+      if(index==0){
+          hideSheet();
+          alert('log out');
+      }else{
+        hideSheet();
+        $scope.getPhotos();
+     }
+    }
+    })
+
+
+       // if($scope.toggle=='left'){
+       //  $scope.toggle='right';
+       // }else{
+       //   $scope.toggle='left';
+       // }
+      // alert($scope.toggle);
+     }
     // }
     // $scope.doThis2=function(){
     //   // $scope.showAlert("Connection to the server could not be acheived at this time. Increase your WiFi/service or try again later.","Failed.");

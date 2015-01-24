@@ -1311,7 +1311,93 @@ html {
 .activeTab{
   color:#2a4759;
 }
+.logOut{
+  color:red;
+}
+.profileBody{
+  padding-top: 19%;
+}
+.profileBtns{
+  width: 95%;
+  /*text-align: center!important;*/
+  /*vertical-align: center!important;*/
+  /*margin-left: 2%;*/
+  margin: auto;
+  padding-bottom: 13%;
+  /*padding: 0;*/
+  /*padding: 2.5%;*/
+}
+.leftTog{
+    border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+   border-right: none;
+}
 
+.rightTog{
+    border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+      border-left: none;
+
+}
+.profBtn1{
+    font-size: 14px;
+   /*margin: 0!important;*/
+   background-color: gray;
+     border: 1px solid gray;
+   /*padding-left: auto;*/
+   /*padding-right: auto;*/
+    /*width:42.5%;*/
+     /*margin-left: auto!important;*/
+     color:white;
+       padding: 1.3%;
+       padding-right: 6%;
+       padding-left: 6%;
+        display: inline;
+        float: left;
+         width: 50%!important;
+
+  /*margin: auto;*/
+   /*border-radius: 8%!important;*/
+}
+.profBtn2{
+  font-size: 14px;
+ /*margin-right: auto!important;*/
+   /*margin: 0!important;*/
+   background-color: white;
+     border: 1px solid gray;
+   /*padding-left: auto;*/
+   /*padding-right: auto;*/
+    /*width:42.5%;*/
+     display: inline;
+     color:gray;
+       padding: 1.3%;
+       padding-right: 6%;
+       padding-left: 6%;
+       float: left;
+       width: 50%!important;
+  /*border-radius: 8%!important;*/
+}
+.topProfile{
+  /*background-color: white;*/
+  /*width: 100%!important;*/
+  z-index: 999!important;
+  padding-bottom:7%;
+ /* margin-bottom: 15%;*/
+  /*margin-top: 10%;*/
+  /*padding-top: 7%;*/
+  padding-left: 10%;
+  /*text-align: right;*/
+  top:5.5%;
+  right:3.6%;
+  /*text-align:right;*/
+  /*border-bottom: 1px solid gray;*/
+  font-size: 25px;
+  /*font-family: 'Gafata', sans-serif;*/
+  /*opacity: 1;*/
+  color: gray;
+  opacity: .75;
+  position: absolute;
+}
 
 /*@-webkit-keyframes fadeInto{ 0% {opacity: 1;} 100% {opacity: .1;}  }*/
 
@@ -1365,6 +1451,32 @@ html {
       overflow: hidden;
       o-text-overflow: ellipsis;
       text-overflow: ellipsis;
+}
+.profileName{
+ /*padding-top: 5%;*/
+    font-size: 22px;
+  font-family: 'Gafata', sans-serif;
+  color:#141414;
+  text-align: center;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+   margin-top: 3%!important;
+}
+.profImg{
+  /*border: gray 1px solid;*/
+  height:50px;
+  width: 50px;
+}
+.profileUsername{
+  font-size: 13px;
+  font-family: 'Gafata', sans-serif;
+  color:#9fabb7;
+  opacity: .8;
+  text-align: center;
+   margin-top: -1.5%!important;
+   padding-bottom: 1%;
+
+  /*font-style: italic;*/
 }
 .likePrice{
   font-size: 16px;
@@ -2166,12 +2278,17 @@ font-size: 17px;
   /*right:10px;*/
 }
 #backBtnId{
-  font-size: 40px;
-  padding-right: 50px!important;
+  font-size: 25px;
+  color:gray;
+  z-index: 999!important;
+  /*-webkit-animation: faderInto 2.3s;*/
+  padding-left: 50px!important;
   /*padding-top: 10px!important;*/
   padding-bottom: 25px!important;
-  float: left;
-  padding-top: 1%;
+  float: right;
+  padding-top: 12px!important;
+  padding-right: 10px!important;
+  opacity: .7;
   /*margin-top: 20%!important;*/
 }
 

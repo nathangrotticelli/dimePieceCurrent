@@ -3806,6 +3806,7 @@ a.subdued {
     background-color: rgba(0, 0, 0, 0.5); }
 
 .modal {
+  /*-webkit-animation: 3.35s!im;*/
   display: block;
   position: absolute;
   top: 0;

@@ -82,7 +82,8 @@
 
 
 .middleTab{
-   color:#8A888F;
+   color:#141414;
+   opacity: .9;
    /*background-color: blue;*/
   /*padding: 10.5%;*/
     /*padding-bottom: 1%;*/
@@ -855,9 +856,11 @@ form{
 
 }
 .watchFeedBtns i{
-  font-size: 31px;
+  font-size: 26px;
   padding: 9.5%;
-  color:#22A7F0;
+  /*color:#22A7F0;*/
+  color:#141414;
+  /*opacity:.65;*/
 
   /*margin-bottom: 2%;*/
 }
@@ -866,7 +869,7 @@ form{
       /*padding-top: 5%;*/
   /*padding-bottom: 4.5%;*/
   text-align: center;
- font-size: 31px;
+ /*font-size: 25px;*/
 
   /*padding: 10%;*/
   /*margin-left: 5%;*/
@@ -880,8 +883,8 @@ form{
     padding-top: 4%;
   padding-bottom: 4.5%;
   text-align: center;
- font-size: 31px;
-  color:#22A7F0!important;
+ font-size: 26px!important;
+  color:#22A7F0;
   /*padding: 10%;*/
   /*margin-left: 5%;*/
    /*text-align: center!important;*/
@@ -930,6 +933,9 @@ form{
   font-weight: bolder;
   /*text-decoration: underline;*/
 }
+.profilePage{
+   -webkit-animation: faderInto 1.3s;
+}
 .eventInfoSection{
   /*padding-top: 1%;*/
   /*margin-top: -10px;*/
@@ -942,12 +948,12 @@ form{
 /*border-top: 0px;*/
 }
 .shopFull{
-    -webkit-animation: faderInto .8s;
+    -webkit-animation: faderInto 1.3s;
 }
 /*color:#bbbdbb;#8DEEEE color:#BADA55; color:#0ff1ce; color:#20c2ff;*/
 .mesh{
-  background-color: #ecf0f1;
-    -webkit-animation: faderInto .8s;
+  background-color: white;
+    -webkit-animation: faderInto 1.3s;
   /*opacity: .9;*/
   /*-webkit-animation: show 1.2s 1;*/
   /*background-image: url("../images/outsideMesh.png");*/
@@ -1309,7 +1315,8 @@ html {
    /*color: black!important;*/
 }
 .activeTab{
-  color:#2a4759;
+  color:#ff6030;
+  opacity: 1;
 }
 .logOut{
   color:red;
@@ -1415,6 +1422,7 @@ html {
   z-index: 999;
   padding-top: 4%;
   padding-bottom: 1%;
+  /*max-height: 380px!important;*/
   /*border-radius: 8%;*/
   border-bottom: 1px solid lightgray;
   background-color: white;
@@ -1432,13 +1440,14 @@ html {
 }
 
 #expandedEvent .watchName{
-  padding-top: 5%;
+  padding-top: 7%;
     font-size: 18px;
   font-family: 'Gafata', sans-serif;
   color:#141414;
   text-align: center;
-  padding-left: 1.5%;
-  padding-right: 1.5%;
+  padding-left: 8.5%;
+  padding-right: 8.5%;
+  opacity: .9;
 }
 
 .watchFeedBtns .watchName{
@@ -1446,9 +1455,12 @@ html {
     font-size: 17px;
   font-family: 'Gafata', sans-serif;
   color:#141414;
+  opacity: .9;
   text-align: center;
-  padding-left: 1.5%;
-  padding-right: 1.5%;
+  /*padding-left: 1.5%;*/
+  /*padding-right: 1.5%;*/
+  margin-right: 5%;
+  margin-left: 5%;
   white-space: nowrap;
       overflow: hidden;
       o-text-overflow: ellipsis;
@@ -1485,7 +1497,7 @@ html {
   font-family: 'Gafata', sans-serif;
   color:#9fabb7;
   text-align: center;
-   margin-top: -1.5%!important;
+   margin-top: -2%!important;
    padding-bottom: 1%;
 
   /*font-style: italic;*/
@@ -1507,7 +1519,7 @@ html {
   position: absolute;
 }
  .unMenu33{
-  background-color: #22A7F0;
+  background-color: #ff6030;
   width: 100%;
   /*z-index: 999!important;*/
   /*padding-bottom:3%;*/
@@ -1534,18 +1546,22 @@ html {
   /*position: absolute;*/
 }
 .joinTxt{
-    font-size: 21px;
+    font-size: 18px;
     color:white;
-    /*font-weight: bolder;*/
+    opacity: .9;
+      /*font-family: 'Gafata', sans-serif;*/
+    font-weight: bold;
         /*border-bottom: none;*/
 }
 .loginTxt{
-    padding-top:25%;
-    font-size: 21px;
+    padding-top:26%;
+    font-size: 18px;
     color:#141414;
+    opacity: .8;
+      /*font-family: 'Gafata', sans-serif;*/
       /*opacity: .8;*/
     /*position: absolute;*/
-    /*font-weight: bolder;*/
+    font-weight: bold;
         /*border-bottom: none;*/
 }
 .loginX{
@@ -1586,7 +1602,7 @@ html {
   background-color: #ecf0f1;
   opacity: 1;
   width: auto!important;
-    -webkit-animation: faderInto 1s;
+    -webkit-animation: faderInto 1.3s;
   /*height: 100%!important;*/
   /*z-index: 999;*/
 
@@ -1620,7 +1636,7 @@ html {
     /*-webkit-animation: show 1.2s 1;*/
   /*float: left;*/
   /*margin-bottom: 1%;*/
-  background-color: #22A7F0;
+  background-color: #ff6030;
   width: 100%!important;
   z-index: 999!important;
   /*height:0;*/
@@ -1630,7 +1646,7 @@ html {
   /*padding-top: 10.5%;*/
   margin-top:24%;
   /*border-bottom: 1px solid #141414;*/
-  font-family: 'Gafata', sans-serif;
+  /*font-family: 'Gafata', sans-serif;*/
 
   position: absolute;
 
@@ -2006,11 +2022,11 @@ html {
   /*position: relative;*/
   /*margin-top: 8%;*/
    /*min-height: 20%;*/
-  max-height:290px;
+  max-height:280px;
   min-height: 150px;
   /*width: 80%;*/
   max-width: 48%;
-  padding-top:6%;
+  padding-top:5%;
   padding-bottom:7%;
   /*margin-top: 2%;*/
 }
@@ -2197,6 +2213,9 @@ button{
   /*top:-50px;*/
   z-index: 999!important;
   -webkit-animation: faderInto 2.3s;
+  opacity: .9;
+  padding-right: 5%;
+  padding-bottom: 5%;
   /*display: inline!important;*/
   /*border:6px solid black;*/
   /*border-bottom: thick double;*/

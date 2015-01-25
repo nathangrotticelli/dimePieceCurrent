@@ -559,17 +559,6 @@ $scope.goCat = function(link){
     })
    }
 
-      // window.StatusBar.backgroundColorByName("red");
-
-    // $cordovaStatusbar.overlaysWebView(true);
-
-  // $cordovaStatusBar.style(1); //Light
-
-     // $scope.events2 = [];
-
-
-
-
      $scope.expandPrice= function(event) {
      event.showPrice = !event.showPrice;
     };

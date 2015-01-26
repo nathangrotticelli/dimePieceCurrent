@@ -54,156 +54,203 @@ angular.module('sociogram.services', [])
         }
       ];
   var privateList = {};
-  var userItem = false;
-  // var userItem =   {
-  //           "username": "ng225",
-  //           "userFullName": "Nathan Grotticelli",
-  //           "userEmail": "nathangrotticelli@gmail.com",
-  //           "userPass": "Apples123",
-  //           "userPic": "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",
-  //           "likes": [   {
-  //                   "tags": [
-  //                       "MIN",
-  //                       "BF",
-  //                       "U20",
-  //                       "STY"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/Casio-MQ24-9B-Classic-Analog-Watch/dp/B0001XVUFA/ref=pd_sbs_watch_6?ie=UTF8&refRID=1WQGYZ2KJ38VJQ159X3Y",
-  //                   "watchPrice": "$11",
-  //                   "watchPhoto": "http://i57.tinypic.com/2iuzw9l.jpg",
-  //                   "watchName": "Casio MQ24-9B Analog Classic Black",
-  //                   "showPrice": false
-  //               },
-  //               {
-  //                   "tags": [
-  //                       "TCH",
-  //                       "MDR",
-  //                       "BF",
-  //                       "U40"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "add1",
-  //                       "add1",
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/Luxury-Bluetooth-iphone-Android-Samsung/dp/B00JL9AY02/ref=sr_1_1?s=apparel&ie=UTF8&qid=1421224569&sr=1-1&keywords=watches",
-  //                   "watchPrice": "$31",
-  //                   "watchPhoto": "http://i57.tinypic.com/10ek1p3.jpg",
-  //                   "watchName": "2014 Red iPhone/Android Bluetooth Smartwatch",
-  //                   "showPrice": false
-  //               },
-  //               {
-  //                   "tags": [
-  //                       "MDR",
-  //                       "ADV",
-  //                       "STY",
-  //                       "DAD",
-  //                       "OUT",
-  //                       "100"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/dp/B00FSEF6JI?psc=1",
-  //                   "watchPrice": "$298",
-  //                   "watchPhoto": "http://i60.tinypic.com/2z68dqf.jpg",
-  //                   "watchName": "Calabria Aventura Chronograph with Carbon Fiber Bezel",
-  //                   "showPrice": false
-  //               },
-  //               {
-  //                   "tags": [
-  //                       "MDR",
-  //                       "MIN",
-  //                       "STY",
-  //                       "BF",
-  //                       "U20"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/Casio-MQ24-1E-Black-Resin-Watch/dp/B000GAWSHM/ref=sr_1_7?ie=UTF8&qid=1421219748&sr=8-7&keywords=watches",
-  //                   "watchPrice": "$13",
-  //                   "watchPhoto": "http://i62.tinypic.com/5ys3nk.jpg",
-  //                   "watchName": "Casio MQ24-1E Full Black Resin",
-  //                   "showPrice": false
-  //               },
-  //               {
-  //                   "tags": [
-  //                       "MDR",
-  //                       "ADV",
-  //                       "STY",
-  //                       "DAD",
-  //                       "OUT",
-  //                       "100"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "add1",
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/dp/B00FSEF6JI?psc=1",
-  //                   "watchPrice": "$298",
-  //                   "watchPhoto": "http://i60.tinypic.com/2z68dqf.jpg",
-  //                   "watchName": "Calabria Aventura Chronograph with Carbon Fiber Bezel",
-  //                   "showPrice": false
-  //               },
-  //               {
-  //                   "tags": [
-  //                       "TCH",
-  //                       "MDR",
-  //                       "BF",
-  //                       "U40"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "ng225",
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/Luxury-Bluetooth-iphone-Android-Samsung/dp/B00JL9AY02/ref=sr_1_1?s=apparel&ie=UTF8&qid=1421224569&sr=1-1&keywords=watches",
-  //                   "watchPrice": "$31",
-  //                   "watchPhoto": "http://i57.tinypic.com/10ek1p3.jpg",
-  //                   "watchName": "2014 Red iPhone/Android Bluetooth Smartwatch",
-  //                   "showPrice": false
-  //               },
-  //               {
-  //                   "tags": [
-  //                       "MDR",
-  //                       "BF"
-  //                   ],
-  //                   "watchLikes": [
-  //                       "ng225"
-  //                   ],
-  //                   "watchLink": "http://www.amazon.com/Invicta-Collection-Stainless-Steel-Watch/dp/B002PAPT1S/ref=swr_wa_1_ses",
-  //                   "watchPrice": "$74",
-  //                   "watchPhoto": "http://i57.tinypic.com/2vn11mq.jpg",
-  //                   "watchName": "Invicta Stainless 6620",
-  //                   "showPrice": false
-  //               }
-  //               ],
-  //           "collections": []
-  //       };
+  // var userItem = false;
+  var userItem =      {
+            "username": "ng225",
+            "userFullName": "Nathan Grotticelli",
+            "userEmail": "anak@apl.co",
+            "userPass": "ikh",
+            "userPic": "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",
+            "likes": [
+                {
+                    "tags": [
+                        "ATH",
+                        "DAD",
+                        "OUT",
+                        "U40"
+                    ],
+                    "watchLikes": [
+                        "add1",
+                        "add1",
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/U-S-Polo-Assn-Sport-US9057/dp/B003EKNMAI/ref=pd_sbs_watch_5?ie=UTF8&refRID=0GXHWCEFHNFX414DCZVJ",
+                    "watchPrice": "$21",
+                    "watchPhoto": "http://i62.tinypic.com/1zbti7c.jpg",
+                    "watchName": "U.S. Polo Assn. US9057 Sport",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "MDR",
+                        "MIN",
+                        "BF",
+                        "STY",
+                        "U40"
+                    ],
+                    "watchLikes": [
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/U-S-Polo-Assn-Classic-USC50007/dp/B003DIPBKA/ref=pd_sbs_watch_1?ie=UTF8&refRID=0RCDX2YSTTC4NMFZA6YB",
+                    "watchPrice": "$21",
+                    "watchPhoto": "http://i61.tinypic.com/2rcy24z.jpg",
+                    "watchName": "U.S. Polo Assn. Classic",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "MDR",
+                        "U20"
+                    ],
+                    "watchLikes": [
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/dp/B00MAQ2RAS?psc=1",
+                    "watchPrice": "$16",
+                    "watchPhoto": "http://i62.tinypic.com/2821ism.jpg",
+                    "watchName": "Black Element Rubber Wrist Watch",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "MIN",
+                        "DAD",
+                        "BF",
+                        "U20"
+                    ],
+                    "watchLikes": [
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/Casio-MQ24-7B2-Analog-Watch-Black/dp/B000GB0G7A/ref=pd_sbs_watch_1?ie=UTF8&refRID=118H2MYECHJ74AZB0JJ8",
+                    "watchPrice": "$8",
+                    "watchPhoto": "http://i57.tinypic.com/wu3406.jpg",
+                    "watchName": "Casio MQ24-7B2 Analog Black Resin",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "MDR",
+                        "STY",
+                        "MIN",
+                        "BF"
+                    ],
+                    "watchLikes": [
+                        "add1",
+                        "add1",
+                        "add1",
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/Kenneth-Cole-Reaction-RK1233-Watch/dp/B00A92V1RK/ref=pd_sbs_watch_3?ie=UTF8&refRID=0BV5JZC61QQWHEDCEE92",
+                    "watchPrice": "$43",
+                    "watchPhoto": "http://i57.tinypic.com/nfmvs2.jpg",
+                    "watchName": "Kenneth Cole Reaction RK1233",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "U20",
+                        "MOM",
+                        "GF"
+                    ],
+                    "watchLikes": [
+                        "add1",
+                        "add1",
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/XOXO-Womens-XO5589-Gold-Tone-Bracelet/dp/B00AATE9N0/ref=pd_sim_watch_6?ie=UTF8&refRID=0BV5JZC61QQWHEDCEE92",
+                    "watchPrice": "$19",
+                    "watchPhoto": "http://i58.tinypic.com/6qa4ic.jpg",
+                    "watchName": "XOXO Gold-Tone Bracelet Watch",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "100",
+                        "DAD",
+                        "BF",
+                        "STY",
+                        "MDR"
+                    ],
+                    "watchLikes": [
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/dp/B00EAOP3HM?psc=1",
+                    "watchPrice": "$358",
+                    "watchPhoto": "http://i62.tinypic.com/2z59oo5.jpg",
+                    "watchName": "Calabria Sottomarino Ceramic & Rose Gold Chronograph",
+                    "liked": true,
+                    "showPrice": false
+                },
+                {
+                    "tags": [
+                        "100",
+                        "DAD",
+                        "BF",
+                        "STY",
+                        "ADV"
+                    ],
+                    "watchLikes": [
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "add1",
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/dp/B0013BKY5Q?psc=1",
+                    "watchPrice": "$167",
+                    "watchPhoto": "http://i59.tinypic.com/2s31g.jpg",
+                    "watchName": "Invicta Men's Corduba 4900",
+                    "liked": true,
+                    "showPrice": false
+                },
+
+                {
+                    "tags": [
+                        "TCH",
+                        "OUT",
+                        "U20"
+                    ],
+                    "watchLikes": [
+                        "ng225"
+                    ],
+                    "watchLink": "http://www.amazon.com/SKMEI-Fashion-Function-Waterproof-Military/dp/B00HJFMRFA/ref=sr_1_5?ie=UTF8&qid=1421219748&sr=8-5&keywords=watches&pebp=1421220224474&peasin=B00HJFMRFA",
+                    "watchPrice": "$9",
+                    "watchPhoto": "http://i59.tinypic.com/1zzt5i0.jpg",
+                    "watchName": "Black Waterproof LED Wrist Watch",
+                    "liked": true,
+                    "showPrice": false
+                }
+            ],
+            "collections": []
+        };
   var school = "";
   var unFriends = [];
   // var userProfId = "";
   var newUser = "no";
   var newNot = false;
- var tinderView = false;
+ var profileView = true;
   var singleView = false;
  var startCard = true;
  var userPic = "";
@@ -307,11 +354,11 @@ angular.module('sociogram.services', [])
             getStart: function () {
                 return startCard;
             },
-            setTinderView: function(value) {
-                tinderView = value;
+            setProfileView: function(value) {
+                profileView = value;
             },
-            getTinderView: function () {
-                return tinderView;
+            getProfileView: function () {
+                return profileView;
             },
              setSingleView: function(value) {
                 singleView = value;

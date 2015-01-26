@@ -23,13 +23,13 @@
   </div>
 
 
-  <ion-scroll scrollbar-y="true" id="eventList">
-      <ion-refresher id="re1" pulling-icon="none" refreshing-icon="ion-ios7-reloading"  on-refresh="refreshWatches()">
+  <ion-scroll scrollbar-y="true" id="eventList22">
+     <ion-refresher id="re1" pulling-icon="none" refreshing-icon="ion-ios7-reloading"  on-refresh="refreshWatches()">
   </ion-refresher>
-
   <!-- <hr class="div12"> -->
 
 <!-- data = data.substr(0, 4) + " " + data.substr(4, 6) -->
+<br>
   <div class="eventScroller" ng-repeat="watch in watchList" ng-click="go_here(watch)" >
 
     <div class="front">
@@ -62,11 +62,7 @@
   </div>
 
 </div>
-<div ng-if="watchList.length==0||watchList.length==undefined">
-<br><br><br>
-<h1 class="ion-loading-c"></h1>
-</div>
-<br><br><br>
+
 
  </ion-scroll>
 

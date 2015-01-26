@@ -914,6 +914,9 @@ form{
   /*padding-bottom: 0px!important;*/
   /*margin-bottom: 0;*/
 }
+/*.eventScroller:first-child{
+    margin-top: 5%;
+  }*/
 
 .div12{
   height:1px;
@@ -1457,10 +1460,10 @@ html {
   color:#141414;
   opacity: .9;
   text-align: center;
-  /*padding-left: 1.5%;*/
-  /*padding-right: 1.5%;*/
-  margin-right: 5%;
-  margin-left: 5%;
+  /*padding-left: 4%;*/
+  /*padding-right: 4%;*/
+  margin-right: 4%;
+  margin-left: 4%;
   white-space: nowrap;
       overflow: hidden;
       o-text-overflow: ellipsis;

@@ -1,12 +1,13 @@
 
 <ion-view hide-back-button="true" hide-nav-bar="true" >
-     <ion-content scroll="true" scrollbar-y="true" class="profilePage">
-
-
-
-   <a class="topProfile" ng-click="settingProf()">
+ <a class="topProfile" ng-click="settingProf()">
     <i class="ion-gear-a"></i>
   </a>
+     <ion-content scroll="true" scrollbar-y="true" class="profilePage">
+
+      <ion-refresher id="re1" pulling-icon="none" refreshing-icon="ion-ios7-reloading"  on-refresh="refreshWatches()">
+  </ion-refresher>
+
   <div class="profileBody">
         <img ng-show="user.userPic.length==0" class="profSpot ion-image">
         <img ng-show="user.userPic.length>0" class="profImg ion-image" ng-src="data:image/jpg;base64,{{user.userPic}}">
@@ -14,21 +15,59 @@
           <h2 class="profileName">{{user.userFullName}}</h2>
         <h2 class="profileUsername">@{{user.username}}</h2>
 
-        <div class="profileBtns" ng-init="$scope.toggle=true">
-          <div ng-if="$scope.toggle==true" class="profBtn1 leftTog">{{user.likes.length}} likes</div>
-            <div ng-if="$scope.toggle==true" ng-click="$scope.toggle=!$scope.toggle" class="profBtn2 rightTog">{{user.collections.length}} collections
+        <div class="profileBtns">
+          <div ng-show="toggle==true" class="profBtn1 leftTog">{{user.likes.length}} likes</div>
+            <div ng-show="toggle==true" ng-click="toggleProf()" class="profBtn2 rightTog">{{user.collections.length}} collections
             </div>
 
-             <div ng-if="$scope.toggle==false" ng-click="$scope.toggle=!$scope.toggle" class="profBtn2 leftTog">{{user.likes.length}} likes</div>
-           <div ng-if="$scope.toggle==false"  class="profBtn1 rightTog">{{user.collections.length}} collections
+             <div ng-show="toggle==false" ng-click="toggleProf()" class="profBtn2 leftTog">{{user.likes.length}} likes</div>
+           <div ng-show="toggle==false"  class="profBtn1 rightTog">{{user.collections.length}} collections
            </div>
 
          </div>
 
-         <label class="item item-input" >
+     <!--     <label class="item item-input" >
           <i class="icon ion-person placeholder-icon"></i>
          <input type="text" placeholder="Full Name" >
-         </label>
+         </label> -->
+</div>
+  <!-- <hr class="div12"> -->
+
+<!-- data = data.substr(0, 4) + " " + data.substr(4, 6) -->
+  <div ng-show="toggle==true" class="eventScroller" ng-repeat="watch in user.likes" ng-click="go_here(watch)" >
+
+    <div class="front">
+    <img class="full-image" src="{{watch.watchPhoto}}">
+    <!-- <img ng-hide="event.cover!=undefined" ng-click="go_here(event)" class="full-image" src="http://i62.tinypic.com/2zznq55.jpg" > -->
+
+          <div class="eventInfoSection" ng-init="watch.liked=liked(watch);">
+            <!-- watchAction(event); -->
+             <!-- <a ng-hide="event.watched" ng-click="$event.stopPropagation();" class="ion-ios7-eye-outline watchBtn"></a> -->
+             <!-- <a ng-click="" class="ion-ios7-eye watchBtn"></a> -->
+      <!-- <h3 id="eventName">{{event.name}}</h3> -->
+      <div ng-init="watch.showPrice=false;" class="watchFeedBtns item-text-wrap">
+        <h2 class="watchName">{{watch.watchName}}</h2>
+        <h2 class="likePrice">{{watch.watchLikes.length}} likes / {{watch.watchPrice}}</h2>
+
+                <!--   <i ng-click="expandPrice(event)" ng-if="event.showPrice==false" class="icon ion-cash"></i>
+                  <i ng-click="expandPrice(event)" ng-if="event.showPrice==true" class="animate-if">
+                 10.00
+               </i> -->
+               <i ng-click="$event.stopPropagation(); addWish(watch);" ng-hide="watch.liked" class="icon ion-ios7-heart-outline"></i>
+               <i ng-click="$event.stopPropagation(); removeWish(watch);" ng-show="watch.liked" class="icon red ion-ios7-heart"></i>
+               <i ng-click="$event.stopPropagation(); loginPrompt();" class="icon ion-ios7-plus-empty"></i>
+               <i ng-click="$event.stopPropagation(); shareBtn('Check out this watch I found via Dimepiece: http://unightlife.io/app. What do you think?', 'Check This Dimepiece.',watch.watchPhoto, null);" class="icon ion-ios7-upload-outline"></i>
+
+              </div>
+      <!-- <p id="eventLocation" ng-if="event.location!=null"><i class="icon ion-cash"></i> {{event.location}}</p> -->
+      <!-- <p class="eventDT" ng-if="event.start_time!=null">{{event.start_time}}</p> -->
+       <!-- <p class="eventDT" ng-if="event.timeOfEvent!=null">{{event.timeOfEvent}}</p> -->
+    </div>
+  </div>
+
+</div>
+<div ng-show="toggle==false">
+  <h1>collections</h1>
 </div>
 
 

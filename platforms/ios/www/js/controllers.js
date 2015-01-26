@@ -658,6 +658,11 @@ $scope.goCat = function(link){
       $location.path('/app/loading');
     };
 
+       $scope.toggleProf = function(){
+      $scope.toggle = !$scope.toggle;
+      PetService.setProfileView($scope.toggle);
+    };
+
     setTimeout(function() {
       navigator.splashscreen.hide();
     }, 1000);
@@ -671,6 +676,9 @@ $scope.goCat = function(link){
     $scope.watchList = PetService.getWatchList();
     $scope.shopCatList = PetService.getCatList();
     $scope.user = PetService.getUser();
+    $scope.toggle=PetService.getProfileView();
+
+
 
 
     // }

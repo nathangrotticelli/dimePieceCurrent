@@ -562,13 +562,46 @@ $scope.goCat = function(link){
      $scope.expandPrice= function(event) {
      event.showPrice = !event.showPrice;
     };
+
      $scope.addWish= function(watch) {
-     watch.watchLiked = true;
-     watch.watchLikes.push({"name":"Nathan"});
+       if($scope.user){
+           var watchLoc = $scope.watchList.indexOf(watch);
+            $scope.user.likes.push(watch);
+            $scope.watchList[watchLoc].watchLikes.push($scope.user.username);
+             $scope.watchList[watchLoc].liked = !$scope.watchList[watchLoc].liked;
+           $http.post('http://stark-eyrie-6720.herokuapp.com/liked',
+                 {
+                    watchObj: watch,
+                    username: $scope.user.username
+                  });
+       }
+       else{
+         $scope.loginPrompt();
+       }
     };
+
+    $scope.liked = function(watch){
+      if($scope.user){
+        for(p=0;p<$scope.user.likes.length;p++){
+          if($scope.user.likes[p].watchName==watch.watchName){
+            return true;
+          }
+        }
+      }
+    };
+
      $scope.removeWish= function(watch) {
-      watch.watchLiked = false;
-      watch.watchLikes.pop();
+      // if($scope.user){}
+        var watchLoc = $scope.watchList.indexOf(watch);
+         $scope.user.likes.splice($scope.user.likes.indexOf(watch),1);
+       $scope.watchList[watchLoc].watchLikes.splice(watchLoc,1);
+          $scope.watchList[watchLoc].liked = !$scope.watchList[watchLoc].liked;
+
+         $http.post('http://stark-eyrie-6720.herokuapp.com/unliked',
+               {
+                  username: $scope.user.username,
+                  watchObj: watch
+                });
     };
     //used to throw better looking popup messages to user
     $scope.showAlert = function(message,title) {

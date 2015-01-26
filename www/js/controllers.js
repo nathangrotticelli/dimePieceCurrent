@@ -220,7 +220,9 @@ $scope.closeMe = function(){
   };
 
        $scope.createAccount = function(name,username,email,password){
-
+        var illegalChars = /\W/;
+        var illegalChars2 = /[\W_]/;
+        // var illegalChars3 = /[\(\)\<\>\,\;\:\\\"\[\]]/ ;
 //add check for if name is taken
         if(!name){
           navigator.notification.alert(
@@ -236,13 +238,28 @@ $scope.closeMe = function(){
             "Couldn't Create Account"                 // buttonName
           );
         }
-       else if(!username){
+         else if(illegalChars.test(name)){
+          navigator.notification.alert(
+            'Use valid characters for your name.',  // message
+            null,         // callback
+            "Couldn't Create Account"                 // buttonName
+          );
+        }
+           else if(!username){
           navigator.notification.alert(
             "Username can't be blank.",  // message
             null,         // callback
             "Couldn't Create Account"                 // buttonName
           );
         }
+        else if(illegalChars.test(username)){
+          navigator.notification.alert(
+            'Use only numbers, letters and underscores for your username.',  // message
+            null,         // callback
+            "Couldn't Create Account"                 // buttonName
+          );
+        }
+
         else if(username.length<2){
           navigator.notification.alert(
             'Username is too short (minimum is 2 characters).',  // message
@@ -264,6 +281,13 @@ $scope.closeMe = function(){
             "Couldn't Create Account"                 // buttonName
           );
         }
+        else if(illegalChars2.test(password)){
+          navigator.notification.alert(
+            'Use characters and numbers only for your password.',  // message
+            null,         // callback
+            "Couldn't Create Account"                 // buttonName
+          );
+        }
         else{
           // $scope.uploadPhoto = function(imageURI,username,name,email,password) {}
             $http.post('http://stark-eyrie-6720.herokuapp.com/createUser',
@@ -276,17 +300,17 @@ $scope.closeMe = function(){
               // alert(res3.data.user);
               // alert(res.user);
                PetService.setUser(res3.data.user);
-              $scope.modal.remove();
-               $location.path('/app/login');
+               $scope.modal.remove();
+               $state.go('app.login');
               // alert('success' );
             }).error(function(){
-              if(uploadRetry < 3){
-                    uploadRetry++;
+              // if(uploadRetry < 3){
+                    // uploadRetry++;
                     // alert("retry");
-                     $scope.createAccount(name,username,email,password);
-                } else {
+                     // $scope.createAccount(name,username,email,password);
+                // } else {
                  alert("An error has occurred: Code = " + error.code);
-                }
+                // }
               })
         }
       };
@@ -592,16 +616,26 @@ $scope.goCat = function(link){
 
      $scope.removeWish= function(watch) {
       // if($scope.user){}
-        var watchLoc = $scope.watchList.indexOf(watch);
-         $scope.user.likes.splice($scope.user.likes.indexOf(watch),1);
-       $scope.watchList[watchLoc].watchLikes.splice(watchLoc,1);
-          $scope.watchList[watchLoc].liked = !$scope.watchList[watchLoc].liked;
 
-         $http.post('http://stark-eyrie-6720.herokuapp.com/unliked',
-               {
-                  username: $scope.user.username,
-                  watchObj: watch
-                });
+      //   ){
+      //   alert('here');
+      // }
+        var watchLoc = $scope.watchList.indexOf(watch);
+
+         $scope.user.likes.splice($scope.user.likes.indexOf(watch),1);
+          // alert($scope.user.likes);
+        // alert($scope.watchList[watchLoc].watchLikes);
+       $scope.watchList[watchLoc].watchLikes.splice($scope.watchList[watchLoc].watchLikes.indexOf($scope.user.username,1));
+        // alert($scope.watchList[watchLoc].watchLikes);
+         // alert($scope.watchList[watchLoc].liked);
+          $scope.watchList[watchLoc].liked = !$scope.watchList[watchLoc].liked;
+               // alert($scope.watchList[watchLoc].liked);
+
+         // $http.post('http://stark-eyrie-6720.herokuapp.com/unliked',
+         //       {
+         //          username: $scope.user.username,
+         //          watchObj: watch
+         //        });
     };
     //used to throw better looking popup messages to user
     $scope.showAlert = function(message,title) {

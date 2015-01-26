@@ -38,29 +38,29 @@
         <h1></h1>
 
          <label class="item item-input" ><i class="icon ion-person placeholder-icon"></i>
-         <input type="text" ng-model="user.fullName" placeholder="Full Name" >
+         <input type="text" ng-model="userFullName" placeholder="Full Name" >
          </label>
 
             <label class="item item-input">
               <i class="icon ion-at placeholder-icon"></i>
-              <input type="text" ng-model="user.username" placeholder="Username">
+              <input type="text" ng-model="username" placeholder="Username">
             </label>
 
              <label class="item item-input">
-              <i class="icon ion-ios7-email placeholder-icon paddLeft"></i><input type="email" ng-model="user.email" placeholder="Email Address">
+              <i class="icon ion-ios7-email placeholder-icon paddLeft"></i><input type="email" ng-model="userEmail" placeholder="Email Address">
             </label>
 
 
             <label class="item item-input">
-              <form ng-submit="createAccount(user.fullName,user.username,user.email,user.password)">
+              <form ng-submit="createAccount(userFullName,username,userEmail,password)">
               <i class="icon ion-locked placeholder-icon paddLeft"></i>
 
-                <input type="password" ng-model="user.password" placeholder="Password">
+                <input type="password" ng-model="password" placeholder="Password">
                 </form>
             </label>
 
 
-          <div class="padding" ng-click="createAccount(user.fullName,user.username,user.email,user.password)">
+          <div class="padding" ng-click="createAccount(userFullName,username,userEmail,password)">
             <p class="text-center">
               <a class="createAccount">Create Account</a>
             </p>

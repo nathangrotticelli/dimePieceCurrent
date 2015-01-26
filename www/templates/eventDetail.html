@@ -20,7 +20,7 @@
 	    		</p> -->
 
 
-						  <div ng-init="singleWatch.showPrice=false; singleWatch.watchLiked=liked(singleWatch)" class="watchFeedBtns2">
+						  <div ng-init="singleWatch.showPrice=false;" class="watchFeedBtns2">
         <h2 class="watchName">{{singleWatch.watchName}}</h2>
         <h2 class="likePrice">{{singleWatch.watchLikes.length}} likes</h2>
 
@@ -28,8 +28,10 @@
                   <i ng-click="expandPrice(event)" ng-if="event.showPrice==true" class="animate-if">
                  10.00
                </i> -->
-               <i ng-click="addWish(singleWatch);" ng-if="singleWatch.watchLiked==false" class="icon ion-ios7-heart-outline"></i>
-               <i ng-click="removeWish(singleWatch);" ng-if="singleWatch.watchLiked==true" class="icon red ion-ios7-heart"></i>
+                <!-- <div ng-click="watchAction(singleEvent)"> -->
+               <i ng-click="addWish(singleWatch);" ng-show="singleWatch.liked!=true" class="icon ion-ios7-heart-outline"></i>
+               <i ng-click="removeWish(singleWatch); " ng-show="singleWatch.liked==true" class="icon red ion-ios7-heart"></i>
+                <!-- </div> -->
                <i ng-click="loginPrompt();" class="icon ion-ios7-plus-empty"></i>
                <i ng-click="shareBtn('Check out this watch I found via Dimepiece: http://unightlife.io/app. What do you think?', 'Check This Dimepiece.',singleWatch.watchPhoto, null);" class="icon ion-ios7-upload-outline"></i>
 

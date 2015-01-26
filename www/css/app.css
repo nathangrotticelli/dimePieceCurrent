@@ -871,7 +871,7 @@ form{
   text-align: center;
  /*font-size: 25px;*/
 
-  /*padding: 10%;*/
+  padding: 1%;
   /*margin-left: 5%;*/
    /*text-align: center!important;*/
   /*background-color: */
@@ -881,9 +881,9 @@ form{
 .watchFeedBtns2 i{
     padding: 10.5%;
     padding-top: 4%;
-  padding-bottom: 4.5%;
+  padding-bottom: 2%;
   text-align: center;
- font-size: 26px!important;
+ font-size: 28px!important;
   color:#22A7F0;
   /*padding: 10%;*/
   /*margin-left: 5%;*/
@@ -934,7 +934,7 @@ form{
   /*text-decoration: underline;*/
 }
 .profilePage{
-   -webkit-animation: faderInto 1.3s;
+   -webkit-animation: faderInto 1.4s;
 }
 .eventInfoSection{
   /*padding-top: 1%;*/
@@ -948,12 +948,12 @@ form{
 /*border-top: 0px;*/
 }
 .shopFull{
-    -webkit-animation: faderInto 1.3s;
+    -webkit-animation: faderInto 1.5s;
 }
 /*color:#bbbdbb;#8DEEEE color:#BADA55; color:#0ff1ce; color:#20c2ff;*/
 .mesh{
   background-color: white;
-    -webkit-animation: faderInto 1.3s;
+    -webkit-animation: faderInto 1.5s;
   /*opacity: .9;*/
   /*-webkit-animation: show 1.2s 1;*/
   /*background-image: url("../images/outsideMesh.png");*/
@@ -1602,7 +1602,7 @@ html {
   background-color: #ecf0f1;
   opacity: 1;
   width: auto!important;
-    -webkit-animation: faderInto 1.3s;
+    -webkit-animation: faderInto 1.4s;
   /*height: 100%!important;*/
   /*z-index: 999;*/
 
@@ -2022,7 +2022,7 @@ html {
   /*position: relative;*/
   /*margin-top: 8%;*/
    /*min-height: 20%;*/
-  max-height:280px;
+  max-height:290px;
   min-height: 150px;
   /*width: 80%;*/
   max-width: 48%;

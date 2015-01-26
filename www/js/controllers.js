@@ -374,7 +374,7 @@ $scope.goCat = function(link){
         // PetService.setShopSingle($scope.watchEx);
          // $scope.main.backBtn = false;
           // $state.go("app.shopDetail");
-       $location.path('/app/shopDetail');
+       $state.go('app.shopDetail');
 };
 
      $scope.refreshWatches = function(){
@@ -460,7 +460,7 @@ $scope.goCat = function(link){
 
       $scope.loginPrompt = function() {
 
-           $location.path('/app/loginPrompt');
+           $state.go('app.loginPrompt');
              // PetService.setTabs(false);
              StatusBar.styleDefault();
 
@@ -471,19 +471,19 @@ $scope.goCat = function(link){
 
     // },100);
     };
-      $scope.goLogin = function(){
+    //   $scope.goLogin = function(){
 
-    if(PetService.getSingleView()==true){
-      $location.path('/app/event-detail');
-       // $scope.main.backBtn = true;
-    }
-    else{
-      // PetService.setBack(false);
-        // StatusBar.styleLightContent();
-      $location.path('/app/login');
-    }
+    // if(PetService.getSingleView()==true){
+    //   $location.path('/app/event-detail');
+    //    // $scope.main.backBtn = true;
+    // }
+    // else{
+    //   // PetService.setBack(false);
+    //     // StatusBar.styleLightContent();
+    //   $location.path('/app/login');
+    // }
 
-    };
+    // };
 
     //   $scope.goBack = function(){
     //     // PetService.setBack(false);
@@ -499,7 +499,7 @@ $scope.goCat = function(link){
       // PetService.setSingleView(true);
        // StatusBar.styleDefault();
        // PetService.setBack(true);
-      $location.path('/app/eventDetail');
+      $state.go('app.eventDetail');
       // $scope.main.backBtn = true;
         // $ionicScrollDelegate.scrollTop(false);
     };
@@ -589,10 +589,16 @@ $scope.goCat = function(link){
 
      $scope.addWish= function(watch) {
        if($scope.user){
+        // alert('here');
            var watchLoc = $scope.watchList.indexOf(watch);
             $scope.user.likes.push(watch);
+              // alert('here2');
             $scope.watchList[watchLoc].watchLikes.push($scope.user.username);
-             $scope.watchList[watchLoc].liked = !$scope.watchList[watchLoc].liked;
+              // alert('here3');
+             $scope.watchList[watchLoc].liked =  true;
+               // alert('here4');
+              // PetService.setUser($scope.user);
+         // PetService.setWatchList($scope.watchList);
            $http.post('http://stark-eyrie-6720.herokuapp.com/liked',
                  {
                     watchObj: watch,
@@ -615,28 +621,26 @@ $scope.goCat = function(link){
     };
 
      $scope.removeWish= function(watch) {
-      // if($scope.user){}
-
-      //   ){
-      //   alert('here');
-      // }
-        var watchLoc = $scope.watchList.indexOf(watch);
-
+         var watchLoc = $scope.watchList.indexOf(watch);
+         // alert($scope.user.likes);
          $scope.user.likes.splice($scope.user.likes.indexOf(watch),1);
-          // alert($scope.user.likes);
-        // alert($scope.watchList[watchLoc].watchLikes);
-       $scope.watchList[watchLoc].watchLikes.splice($scope.watchList[watchLoc].watchLikes.indexOf($scope.user.username,1));
-        // alert($scope.watchList[watchLoc].watchLikes);
-         // alert($scope.watchList[watchLoc].liked);
-          $scope.watchList[watchLoc].liked = !$scope.watchList[watchLoc].liked;
-               // alert($scope.watchList[watchLoc].liked);
+             // alert($scope.user.likes);
+                 // alert($scope.watchList[watchLoc].watchLikes);
+         $scope.watchList[watchLoc].watchLikes.splice($scope.watchList[watchLoc].watchLikes.indexOf($scope.user.username,1));
+            // alert($scope.watchList[watchLoc].watchLikes);
+            // watch.liked = !watch.liked;
+         $scope.watchList[watchLoc].liked = false;
+         // PetService.setUser($scope.user);
+         // PetService.setWatchList($scope.watchList);
 
-         // $http.post('http://stark-eyrie-6720.herokuapp.com/unliked',
-         //       {
-         //          username: $scope.user.username,
-         //          watchObj: watch
-         //        });
+         // $scope.singleWatch.liked = !$scope.singleWatch.liked;
+         $http.post('http://stark-eyrie-6720.herokuapp.com/unliked',
+                 {
+                    watchObj: watch,
+                    username: $scope.user.username
+                  });
     };
+
     //used to throw better looking popup messages to user
     $scope.showAlert = function(message,title) {
       if(title==undefined){

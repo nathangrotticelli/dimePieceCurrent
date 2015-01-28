@@ -394,7 +394,7 @@ $scope.goCat = function(link,catName,catTag){
         // $ionicScrollDelegate.scrollTop(false);
     };
 
-$scope.watchCat =function(watch){
+$scope.watchCat = function(watch){
   return (watch.tags.indexOf($scope.catTag)>-1);
 }
 
@@ -511,19 +511,27 @@ $scope.watchCat =function(watch){
     //    $ionicNavBarDelegate.back();
     //    // $scope.main.backBtn = true;
     // };
-
+// $scope.getLikes = function(watch){
+//       if(watch.watchLikes.length>0){
+//           $http.post('http://stark-eyrie-6720.herokuapp.com/getLikes',
+//                {
+//                   likes: watch.watchLikes
+//                 }).error(function(){
+//                     return [];
+//                 }).then(function(res){
+//                     return res.data.userLikes;
+//                 })
+//       }else{
+//            return [];
+//       }
+// };
         //expands single event
-    $scope.go_here = function (watch) {
-          // $scope.scroll = $ionicScrollDelegate.getScrollPosition().top;
+   $scope.go_here = function (watch) {
+    // alert(watch.likesArray);
       PetService.setSingle(watch);
-        // PetService.setBack(true);
-      // PetService.setSingleView(true);
-       // StatusBar.styleDefault();
-       // PetService.setBack(true);
       $state.go('app.eventDetail');
-      // $scope.main.backBtn = true;
-        // $ionicScrollDelegate.scrollTop(false);
     };
+
     $scope.getPhotos = function(){
     function onSuccess(base64string) {
        hideSheet();
@@ -611,19 +619,26 @@ $scope.watchCat =function(watch){
      $scope.addWish= function(watch) {
        if($scope.user){
         // alert('here');
+           // var user = $scope.user;
            var watchLoc = $scope.watchList.indexOf(watch);
             $scope.user.likes.push(watch);
               // alert('here2');
-            $scope.watchList[watchLoc].watchLikes.push($scope.user.username);
+            if($scope.watchList[watchLoc].watchLikes.length>9){
+              $scope.watchList[watchLoc].watchLikes.push({'username': $scope.user.username, 'userPic': ''});
+            }else{
+              $scope.watchList[watchLoc].watchLikes.push({'username': $scope.user.username, 'userPic': $scope.user.userPic});
+              // var user = $scope.user;
+            }
               // alert('here3');
              $scope.watchList[watchLoc].liked =  true;
                // alert('here4');
               // PetService.setUser($scope.user);
          // PetService.setWatchList($scope.watchList);
+
            $http.post('http://stark-eyrie-6720.herokuapp.com/liked',
                  {
                     watchObj: watch,
-                    username: $scope.user.username
+                    user: $scope.user
                   });
        }
        else{
@@ -642,13 +657,16 @@ $scope.watchCat =function(watch){
     };
 
      $scope.removeWish= function(watch) {
+
          var watchLoc = $scope.watchList.indexOf(watch);
+               // alert($scope.watchList[watchLoc].watchLikes[0]);
          // alert($scope.user.likes);
          $scope.user.likes.splice($scope.user.likes.indexOf(watch),1);
              // alert($scope.user.likes);
                  // alert($scope.watchList[watchLoc].watchLikes);
-         $scope.watchList[watchLoc].watchLikes.splice($scope.watchList[watchLoc].watchLikes.indexOf($scope.user.username,1));
+         $scope.watchList[watchLoc].watchLikes.splice($scope.watchList[watchLoc].watchLikes.indexOf({'username': $scope.user.username},1));
             // alert($scope.watchList[watchLoc].watchLikes);
+              // alert($scope.watchList[watchLoc].watchLikes[0]);
             // watch.liked = !watch.liked;
          $scope.watchList[watchLoc].liked = false;
          // PetService.setUser($scope.user);

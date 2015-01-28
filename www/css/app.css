@@ -953,9 +953,9 @@ form{
 .shopFull{
     -webkit-animation: faderInto 1.7s;
 }
-.moveDown{
+/*.moveDown{
   margin-top:2%;
-}
+}*/
 
 /*color:#bbbdbb;#8DEEEE color:#BADA55; color:#0ff1ce; color:#20c2ff;*/
 .mesh{

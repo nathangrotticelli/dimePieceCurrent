@@ -1,14 +1,14 @@
 
 <ion-view hide-back-button="true" hide-nav-bar="true" >
- <a class="topProfile" ng-click="settingProf()">
-    <i class="ion-gear-a"></i>
-  </a>
+
      <ion-content scroll="true" scrollbar-y="true" class="profilePage">
 
       <ion-refresher id="re1" pulling-icon="none" refreshing-icon="ion-ios7-reloading"  on-refresh="refreshWatches()">
   </ion-refresher>
-
   <div class="profileBody">
+     <a class="topProfile" ng-click="settingProf()">
+    <i class="ion-gear-a"></i>
+  </a>
         <img ng-show="user.userPic.length==0" class="profSpot ion-image">
         <img ng-show="user.userPic.length>0" class="profImg ion-image" ng-src="data:image/jpg;base64,{{user.userPic}}">
 

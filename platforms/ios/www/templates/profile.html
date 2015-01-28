@@ -28,13 +28,13 @@
 
      <!--     <label class="item item-input" >
           <i class="icon ion-person placeholder-icon"></i>
-         <input type="text" placeholder="Full Name" >
+         <input type="text" placeholder="Full Name" >w
          </label> -->
 </div>
   <!-- <hr class="div12"> -->
 
 <!-- data = data.substr(0, 4) + " " + data.substr(4, 6) -->
-  <div ng-show="toggle==true" class="eventScroller" ng-repeat="watch in user.likes" ng-click="go_here(watch)" >
+  <div ng-show="toggle==true" class="eventScroller" ng-repeat="watch in user.likes" ng-click="expandProf(watch)" >
 
     <div class="front">
     <img class="full-image" src="{{watch.watchPhoto}}">

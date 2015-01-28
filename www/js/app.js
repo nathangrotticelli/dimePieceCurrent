@@ -118,6 +118,15 @@ angular.module('sociogram', ['ionic', 'openfb','objectFilters','sociogram.contro
                         }
                       }
                   })
+                            .state('app.profileDetail', {
+                      url: "/profileDetail",
+                      views: {
+                        'profile': {
+                          templateUrl: 'templates/profileDetail.html',
+                          controller: "LoginCtrl"
+                        }
+                      }
+                  })
             .state('app.logout', {
                 url: "/logout",
                 views: {

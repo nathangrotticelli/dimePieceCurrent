@@ -345,6 +345,20 @@ $scope.closeMe = function(){
     });
   };
 
+  $scope.getUser= function(){
+     $http.post('http://stark-eyrie-6720.herokuapp.com/getUser',
+          {testInfo: 'testInfo recieved'}).then(function (res1) {
+          // alert(res1.data.watchList.listName);
+
+          // $scope.events2 = res1.data.watchList.watchIndex;
+          PetService.setUser(res1.data.user);
+          alert('got user');
+          $state.go('app.login');
+          // $scope.watchList = res1.data.watchList.watchesIndex;
+         // alert(res1.data.watchList.watchesIndex);
+       });
+  };
+
   $scope.joinDimepiece = function(){
     if(!$scope.modal){
       $scope.startModal();
@@ -356,6 +370,7 @@ $scope.closeMe = function(){
 
 
 $scope.profPic = PetService.getProfPic();
+// $scope.getUser();
  var uploadRetry = 0;
   // alert($scope.profPic.length);
 
@@ -396,7 +411,21 @@ $scope.goCat = function(link,catName,catTag){
 
 $scope.watchCat = function(watch){
   return (watch.tags.indexOf($scope.catTag)>-1);
-}
+};
+
+  $scope.expandProf = function (watch) {
+          // $scope.scroll = $ionicScrollDelegate.getScrollPosition().top;
+      // PetService.setSingle(watch);
+           PetService.setSingleProfile(watch);
+           $state.go('app.profileDetail');
+        // PetService.setBack(true);
+      // PetService.setSingleView(true);
+       // StatusBar.styleDefault();
+       // PetService.setBack(true);
+      // $state.go('app.eventDetail');
+      // $scope.main.backBtn = true;
+        // $ionicScrollDelegate.scrollTop(false);
+    };
 
      $scope.refreshWatches = function(){
       // var userItem = $scope.userItem;
@@ -620,17 +649,28 @@ $scope.watchCat = function(watch){
        if($scope.user){
         // alert('here');
            // var user = $scope.user;
-           var watchLoc = $scope.watchList.indexOf(watch);
-            $scope.user.likes.push(watch);
-              // alert('here2');
-            if($scope.watchList[watchLoc].watchLikes.length>9){
-              $scope.watchList[watchLoc].watchLikes.push({'username': $scope.user.username, 'userPic': ''});
-            }else{
-              $scope.watchList[watchLoc].watchLikes.push({'username': $scope.user.username, 'userPic': $scope.user.userPic});
-              // var user = $scope.user;
+           // watch.liked = true;
+           for(l=0;l<$scope.watchList.length;l++){
+              if($scope.watchList[l].watchName==watch.watchName){
+                watchLoc = l;
+                $scope.watchList[watchLoc].liked =  true;
+                 if($scope.watchList[watchLoc].watchLikes.length>9){
+                    $scope.watchList[watchLoc].watchLikes.push({'username': $scope.user.username, 'userPic': ''});
+                  }else{
+                    $scope.watchList[watchLoc].watchLikes.push({'username': $scope.user.username, 'userPic': $scope.user.userPic});
+                    // var user = $scope.user;
+                  }
+              }
             }
+           // var watchLoc = $scope.watchList.indexOf(watch);
+            $scope.user.likes.push(watch);
+            PetService.setUser($scope.user);
+            PetService.setWatchList($scope.watchList);
+              // alert('here2');
+
               // alert('here3');
-             $scope.watchList[watchLoc].liked =  true;
+
+
                // alert('here4');
               // PetService.setUser($scope.user);
          // PetService.setWatchList($scope.watchList);
@@ -658,17 +698,39 @@ $scope.watchCat = function(watch){
 
      $scope.removeWish= function(watch) {
 
-         var watchLoc = $scope.watchList.indexOf(watch);
-               // alert($scope.watchList[watchLoc].watchLikes[0]);
-         // alert($scope.user.likes);
-         $scope.user.likes.splice($scope.user.likes.indexOf(watch),1);
-             // alert($scope.user.likes);
+         // watch.liked = false;
+         // var watchLoc = $scope.watchList.indexOf(watch);
+        for(l=0;l<$scope.watchList.length;l++){
+          if($scope.watchList[l].watchName==watch.watchName){
+            watchLoc = l;
+                $scope.watchList[watchLoc].liked = false;
+             // alert(watch.liked);
                  // alert($scope.watchList[watchLoc].watchLikes);
          $scope.watchList[watchLoc].watchLikes.splice($scope.watchList[watchLoc].watchLikes.indexOf({'username': $scope.user.username},1));
+          }
+        }
+          // var watchLoc = $scope.watchList.indexOf(watch);
+         // alert(watchLoc);
+               // alert($scope.watchList[watchLoc].watchLikes[0]);
+
+
             // alert($scope.watchList[watchLoc].watchLikes);
+
               // alert($scope.watchList[watchLoc].watchLikes[0]);
             // watch.liked = !watch.liked;
-         $scope.watchList[watchLoc].liked = false;
+            for(z=0;z<$scope.user.likes.length;z++){
+               if($scope.user.likes[z].watchName==watch.watchName){
+                $scope.user.likes.splice(z,1);
+              }
+            }
+
+
+         PetService.setUser($scope.user);
+            PetService.setWatchList($scope.watchList);
+
+          // watch.watchLikes.splice(watchLikes.indexOf({'username': $scope.user.username},1));
+              // alert(watch.liked);
+          // $scope.singleProfileWatch.liked = false;
          // PetService.setUser($scope.user);
          // PetService.setWatchList($scope.watchList);
 
@@ -708,6 +770,7 @@ $scope.watchCat = function(watch){
 
      $scope.singleWatch = PetService.getSingle();
      $scope.singleShopWatch = PetService.getSingleShop();
+     $scope.singleProfileWatch = PetService.getSingleProfile();
 
     if(PetService.getWatchList().length==0){
       $scope.getWatches();
@@ -718,6 +781,7 @@ $scope.watchCat = function(watch){
     $scope.toggle=PetService.getProfileView();
     $scope.catHeader = PetService.getCatHead();
     $scope.catTag = PetService.getCatTag();
+    // $scope.user = PetService.getUser();
 
     $scope.loadLimit=20;
 

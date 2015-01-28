@@ -1,5 +1,5 @@
 
-<ion-view hide-back-button="true" hide-nav-bar="true" animation="slide-left-right">
+<ion-view hide-back-button="true" hide-nav-bar="false" animation="slide-left-right">
 <!-- <ion-header-bar align-title="left" class="bar-positive">
   <div class="buttons">
     <button class="button" ng-click="doSomething()">Left Button</button>
@@ -12,25 +12,20 @@
   </div>
 </ion-header-bar> -->
 
-
-
- <ion-content scroll="false" class="mesh">
-      <!-- </div> -->
 <div class = "unMenu22 ">
   <div>Trending<a class="ion-chevron-down streamArrow"></a>
     <a ng-click="" class="searchIcon ion-ios7-search"></a>
   </div>
   </div>
 
-
-  <ion-scroll scrollbar-y="true" id="eventList22">
+ <ion-content scrollbar-y="true" scroll="true" class="mesh">
+      <!-- </div> -->
      <ion-refresher id="re1" pulling-icon="none" refreshing-icon="ion-ios7-reloading"  on-refresh="refreshWatches()">
   </ion-refresher>
   <!-- <hr class="div12"> -->
 
 <!-- data = data.substr(0, 4) + " " + data.substr(4, 6) -->
-<br>
-  <div class="eventScroller" ng-repeat="watch in watchList" ng-click="go_here(watch)" >
+  <div class="eventScroller" ng-repeat="watch in watchList| limitTo: loadLimit"  ng-click="go_here(watch)" >
 
     <div class="front">
     <img class="full-image" src="{{watch.watchPhoto}}">
@@ -64,7 +59,7 @@
 </div>
 
 
- </ion-scroll>
+ <!-- </ion-scroll> -->
 
 
 

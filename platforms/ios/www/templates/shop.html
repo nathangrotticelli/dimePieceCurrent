@@ -4,7 +4,7 @@
  <ion-content scroll="false" class="shopFull">
       <!-- </div> -->
 <div class = "unMenu22 ">
-  <div>Shop
+  <div>Shop<a class=" streamArrow"></a>
     <a ng-click="" class="searchIcon ion-ios7-search"></a>
   </div>
   </div>
@@ -18,7 +18,7 @@
 <!-- <div class="shopCat">. -->
   <div ng-repeat="cat in shopCatList">
 
-<div class="shopCat" ng-click="goCat('cat')">
+<div class="shopCat" ng-click="goCat('cat',cat.catName,cat.catTag)">
   <div class="shopCatImg item item-image">
    <img src="{{cat.catPhoto}}">
   </div>

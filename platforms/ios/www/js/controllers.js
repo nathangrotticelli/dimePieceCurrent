@@ -370,12 +370,33 @@ $scope.goAmazon = function(link){
   window.open(link,"_system");
 };
 
-$scope.goCat = function(link){
+$scope.goCat = function(link,catName,catTag){
         // PetService.setShopSingle($scope.watchEx);
          // $scope.main.backBtn = false;
           // $state.go("app.shopDetail");
-       $state.go('app.shopDetail');
+          // alert(catName);
+              PetService.setCatHead(catName);
+              PetService.setCatTag(catTag);
+
+       $state.go('app.singleShopCat');
 };
+  $scope.expandCat = function (watch) {
+          // $scope.scroll = $ionicScrollDelegate.getScrollPosition().top;
+      // PetService.setSingle(watch);
+           PetService.setSingleShop(watch);
+           $state.go('app.shopDetail');
+        // PetService.setBack(true);
+      // PetService.setSingleView(true);
+       // StatusBar.styleDefault();
+       // PetService.setBack(true);
+      // $state.go('app.eventDetail');
+      // $scope.main.backBtn = true;
+        // $ionicScrollDelegate.scrollTop(false);
+    };
+
+$scope.watchCat =function(watch){
+  return (watch.tags.indexOf($scope.catTag)>-1);
+}
 
      $scope.refreshWatches = function(){
       // var userItem = $scope.userItem;
@@ -668,7 +689,7 @@ $scope.goCat = function(link){
     }, 1000);
 
      $scope.singleWatch = PetService.getSingle();
-      $scope.singleShopWatch = PetService.getSingle();
+     $scope.singleShopWatch = PetService.getSingleShop();
 
     if(PetService.getWatchList().length==0){
       $scope.getWatches();
@@ -677,6 +698,10 @@ $scope.goCat = function(link){
     $scope.shopCatList = PetService.getCatList();
     $scope.user = PetService.getUser();
     $scope.toggle=PetService.getProfileView();
+    $scope.catHeader = PetService.getCatHead();
+    $scope.catTag = PetService.getCatTag();
+
+    $scope.loadLimit=20;
 
 
 
@@ -1016,7 +1041,7 @@ $scope.arrayObjectIndexOf=function(myArray, searchTerm, property) {
 
     }, 100);
 
-  PetService.setSingleView(false);
+  // PetService.setSingleView(false);
 
 $location.path('/app/person/me/feed');
 
@@ -1515,7 +1540,7 @@ for(event in $scope.events){
     $scope.go_here = function (eventName) {
       PetService.setSingle(eventName);
       // $scope.singleView = true;
-      PetService.setSingleView(true);
+      // PetService.setSingleView(true);
       $location.path('/app/event-detail');
 
       //changes page and controller
@@ -2260,7 +2285,7 @@ $scope.doAlert = true;
     // var allCards1 = PetService.getCards();
     $scope.tinderView = PetService.getTinderView();
     $scope.friendView = false;
-    $scope.singleView = PetService.getSingleView();
+    // $scope.singleView = PetService.getSingleView();
 
     $scope.newNot = PetService.getNewNot();
 

@@ -19,37 +19,46 @@ angular.module('sociogram.services', [])
     // ];
 
   var single = {};
+  var singleShop = {};
   var shopCatList = [
         {
             "catName": "Techie",
-            "catPhoto": "http://i57.tinypic.com/10ek1p3.jpg"
+            "catTag":"TCH",
+            "catPhoto": "http://i62.tinypic.com/2lnd7q1.jpg"
         },
         {
             "catName": "Minimalist",
+            "catTag":"MIN",
             "catPhoto": "http://i62.tinypic.com/5ys3nk.jpg"
         },
         {
             "catName": "Adventurous",
+            "catTag":"ADV",
             "catPhoto": "http://i58.tinypic.com/mw6zhw.jpg"
         },
         {
             "catName": "Stylish",
+            "catTag":"STY",
             "catPhoto": "http://i61.tinypic.com/2rcy24z.jpg"
         },
         {
             "catName": "Modern",
+            "catTag":"MDR",
             "catPhoto": "http://i62.tinypic.com/2821ism.jpg"
         },
         {
             "catName": "Under $20",
-            "catPhoto": "http://i57.tinypic.com/wu3406.jpg"
+            "catTag":"U20",
+            "catPhoto": "http://i62.tinypic.com/2821ism.jpg"
         },
         {
             "catName": "Boyfriendy",
-            "catPhoto": "http://i57.tinypic.com/2iuzw9l.jpg"
+            "catTag":"BG",
+            "catPhoto": "http://i62.tinypic.com/2821ism.jpg"
         },
         {
             "catName": "Outdoorsy",
+            "catTag":"OUT",
             "catPhoto": "http://i59.tinypic.com/1zzt5i0.jpg"
         }
       ];
@@ -254,6 +263,8 @@ angular.module('sociogram.services', [])
   var singleView = false;
  var startCard = true;
  var userPic = "";
+ var catHead = '';
+ var catTag = '';
  var tabs = true;
   var backBtn = false;
  var cards = ["start"];
@@ -303,6 +314,12 @@ angular.module('sociogram.services', [])
             setSingle: function(event) {
                 single = event;
             },
+             getSingleShop: function () {
+                return singleShop;
+            },
+            setSingleShop: function(event) {
+                singleShop = event;
+            },
             setEvents: function(value) {
                 events = value;
             },
@@ -329,6 +346,18 @@ angular.module('sociogram.services', [])
             },
             getBack: function(){
               return backBtn;
+            },
+              setCatHead: function(value) {
+                catHead = value;
+            },
+            getCatHead: function(){
+              return catHead;
+            },
+                setCatTag: function(value) {
+                catTag = value;
+            },
+            getCatTag: function(){
+              return catTag;
             },
             setSchool: function(schoolName) {
                 school = schoolName;

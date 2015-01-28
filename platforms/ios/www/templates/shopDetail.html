@@ -1,32 +1,37 @@
 
 <ion-view hide-back-button="false">
+
+
      <ion-content scroll="false">
 
-<!--  <a class="topBtn ion-ios7-arrow-left" ng-click="goShop2()">
-    </a> -->
- <ion-scroll id='expandedEvent' scrollbar-y="true">
 
+ <ion-scroll id='expandedEvent'  scrollbar-y="true">
+
+<br>
+<!-- <br> -->
           <img class="singleImage" src="{{getCover(singleShopWatch.watchPhoto)}}">
           <!-- <img ng-if="singleEvent.cover==true" src="http://i62.tinypic.com/2zznq55.jpg" > -->
 
     <!--      <p class="watchName">
-            {{ singleShopWatch.name }}
+            {{ singleWatch.name }}
           </p>
           <p class="likePrice">
-            {{ singleShopWatch.watchLikes.length }}
+            {{ singleWatch.watchLikes.length }}
           </p> -->
 
 
-              <div ng-init="singleShopWatch.showPrice=false; singleShopWatch.watchLiked=false;" class="watchFeedBtns2">
+              <div ng-init="singleShopWatch.showPrice=false;" class="watchFeedBtns2">
         <h2 class="watchName">{{singleShopWatch.watchName}}</h2>
-        <h2 class="likePrice">{{singleShopWatch.watchLikes.length}} likes/{{singleShopWatch.watchPrice}}</h2>
+        <h2 class="likePrice">{{singleShopWatch.watchLikes.length}} likes</h2>
 
                 <!--   <i ng-click="expandPrice(event)" ng-if="event.showPrice==false" class="icon ion-cash"></i>
                   <i ng-click="expandPrice(event)" ng-if="event.showPrice==true" class="animate-if">
                  10.00
                </i> -->
-               <i ng-click="addWish(singleShopWatch);" ng-if="singleShopWatch.watchLiked==false" class="icon ion-ios7-heart-outline"></i>
-               <i ng-click="removeWish(singleShopWatch);" ng-if="singleShopWatch.watchLiked==true" class="icon red ion-ios7-heart"></i>
+                <!-- <div ng-click="watchAction(singleEvent)"> -->
+               <i ng-click="addWish(singleShopWatch);" ng-show="singleShopWatch.liked!=true" class="icon ion-ios7-heart-outline"></i>
+               <i ng-click="removeWish(singleShopWatch); " ng-show="singleShopWatch.liked==true" class="icon red ion-ios7-heart"></i>
+                <!-- </div> -->
                <i ng-click="loginPrompt();" class="icon ion-ios7-plus-empty"></i>
                <i ng-click="shareBtn('Check out this watch I found via Dimepiece: http://unightlife.io/app. What do you think?', 'Check This Dimepiece.',singleShopWatch.watchPhoto, null);" class="icon ion-ios7-upload-outline"></i>
 
@@ -45,7 +50,7 @@
 
               <!-- <div class = " "> -->
                 <a class="button unMenu33 icon-right ion-ios7-arrow-right" ng-click="goAmazon(singleShopWatch.watchLink)">{{singleShopWatch.watchPrice}} on Amazon Prime</a>
-                <!-- <div class="ion-ios7-arrow-right">{{singleShowWatch.watchPrice}} on Amazon Prime -->
+                <!-- <div class="ion-ios7-arrow-right">{{singleWatch.watchPrice}} on Amazon Prime -->
                   <!-- <div  class="ion-ios7-arrow-right priceArrow"></div> -->
 
                 <!-- </div> -->
@@ -76,7 +81,6 @@
                 <i class="icon ion-ios7-location"></i>
                 {{ singleEvent.location }}
               </div>
-
                 <br ng-if="singleEvent.location!=null">
 
               <div ng-click="watchAction(singleEvent)" class="item item-icon-left item-divider" >

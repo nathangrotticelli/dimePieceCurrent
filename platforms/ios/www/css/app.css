@@ -937,7 +937,7 @@ form{
   /*text-decoration: underline;*/
 }
 .profilePage{
-   -webkit-animation: faderInto 1.4s;
+   -webkit-animation: faderInto 1.7s;
 }
 .eventInfoSection{
   /*padding-top: 1%;*/
@@ -951,12 +951,18 @@ form{
 /*border-top: 0px;*/
 }
 .shopFull{
-    -webkit-animation: faderInto 1.5s;
+    -webkit-animation: faderInto 1.7s;
 }
+.moveDown{
+  margin-top:2%;
+}
+
 /*color:#bbbdbb;#8DEEEE color:#BADA55; color:#0ff1ce; color:#20c2ff;*/
 .mesh{
+  /*height:auto!important;*/
   background-color: white;
-    -webkit-animation: faderInto 1.5s;
+    -webkit-animation: faderInto 1.9s;
+ /*margin-top:0%;*/
   /*opacity: .9;*/
   /*-webkit-animation: show 1.2s 1;*/
   /*background-image: url("../images/outsideMesh.png");*/
@@ -1605,7 +1611,7 @@ html {
   background-color: #ecf0f1;
   opacity: 1;
   width: auto!important;
-    -webkit-animation: faderInto 1.4s;
+    -webkit-animation: faderInto 1.3s;
   /*height: 100%!important;*/
   /*z-index: 999;*/
 
@@ -2189,7 +2195,7 @@ button{
 .backBar{
   background-color: transparent!important;
   padding-left: 7.5%;
-  padding-top: 2.5%;
+  padding-top: 2%;
   padding-bottom: 3%;
   /*border: none!important;*/
    /*padding-left:3%!important;*/
@@ -2197,14 +2203,14 @@ button{
 .backBar2{
   background-color: transparent!important;
   border: none!important;
-/*   padding-left:3%!important;
-   padding-right:11%!important;
-    padding-bottom:16%!important;*/
+   /*padding-left:3%!important;*/
+   /*padding-right:11%!important;*/
+    /*padding-bottom:5%!important;*/
     /*background-color: blue;*/
 }
 .topBtn{
-  font-size: 45px;
-  color:#141414;
+  font-size: 35px;
+  color:#141414!important;
   /*padding: 10%;*/
   /*margin: 5%;*/
   /*padding-left: 8%;*/
@@ -2216,7 +2222,7 @@ button{
   /*top:-50px;*/
   z-index: 999!important;
   -webkit-animation: faderInto 2.3s;
-  opacity: .9;
+  opacity: .9!important;
   padding-right: 5%;
   padding-bottom: 5%;
   /*display: inline!important;*/
@@ -2302,7 +2308,7 @@ font-size: 17px;
   /*right:10px;*/
 }
 #backBtnId{
-  font-size: 25px;
+  /*font-size: 25px;*/
   color:gray;
   z-index: 999!important;
   /*-webkit-animation: faderInto 2.3s;*/

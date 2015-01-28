@@ -1,5 +1,5 @@
 
-<ion-view hide-back-button="true" hide-nav-bar="true" >
+<ion-view hide-back-button="true" hide-nav-bar="false" >
 
  <ion-content scroll="false" class="shopFull">
       <!-- </div> -->
@@ -18,7 +18,7 @@
 <!-- <div class="shopCat">. -->
   <div ng-repeat="cat in shopCatList">
 
-<div class="shopCat" ng-click="goCat('cat')">
+<div class="shopCat" ng-click="goCat('cat',cat.catName,cat.catTag)">
   <div class="shopCatImg item item-image">
    <img src="{{cat.catPhoto}}">
   </div>

@@ -22,7 +22,8 @@
 
               <div ng-init="singleShopWatch.showPrice=false;" class="watchFeedBtns2">
         <h2 class="watchName">{{singleShopWatch.watchName}}</h2>
-        <h2 class="likePrice">{{singleShopWatch.watchLikes.length}} likes</h2>
+        <h2 ng-if="singleShopWatch.watchLikes.length!=1" class="likePrice">{{singleShopWatch.watchLikes.length}} likes</h2>
+        <h2 ng-if="singleShopWatch.watchLikes.length==1" class="likePrice">{{singleShopWatch.watchLikes.length}} like</h2>
 
                 <!--   <i ng-click="expandPrice(event)" ng-if="event.showPrice==false" class="icon ion-cash"></i>
                   <i ng-click="expandPrice(event)" ng-if="event.showPrice==true" class="animate-if">
@@ -52,7 +53,8 @@
                 <a class="button unMenu33 icon-right ion-ios7-arrow-right" ng-click="goAmazon(singleShopWatch.watchLink)">{{singleShopWatch.watchPrice}} on Amazon Prime</a>
 
                    <div ng-if="singleShopWatch.watchLikes.length>0" class="watchLikeSection">
-                  <p>{{singleShopWatch.watchLikes.length}} likes</p>
+                    <p ng-if="singleShopWatch.watchLikes.length>1">{{singleShopWatch.watchLikes.length}} likes</p>
+                  <p ng-if="singleShopWatch.watchLikes.length<2">{{singleShopWatch.watchLikes.length}} like</p>
                   <div ng-if="hasPics(singleShopWatch.watchLikes)>0" ng-repeat="like in singleShopWatch.watchLikes | filter:hasUserPic | limitTo:4">
                     <img ng-if="like.userPic.length>0" class="profImg floatLeft" ng-src="data:image/jpg;base64,{{like.userPic}}">
                   </div>

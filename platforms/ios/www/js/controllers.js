@@ -351,12 +351,50 @@ $scope.closeMe = function(){
           // alert(res1.data.watchList.listName);
 
           // $scope.events2 = res1.data.watchList.watchIndex;
-          PetService.setUser(res1.data.user);
-          alert('got user');
-          $state.go('app.login');
+
+          // var currUser =  res1.data.user;
+          // alert($scope.watchList.length);
+          var watchList = PetService.getWatchList();
+           var answerArray22 = [];
+
+           res1.data.user.likes.forEach(function(entry) {
+              for(y=0;y<watchList.length;y++){
+                if(entry==watchList[y].watchName){
+                  answerArray22.push(watchList[y]);
+                }
+              }
+            })
+
+        //   for(y=0;y<watchList.length;y++){
+        //      for(p=0;p<res1.data.user.likes.length;p++){
+        //   if(res1.data.user.likes[p]==watchList[y].watchName){
+
+        //     // alert(watchList[y].watchName);
+        //     // currUser = PetService.getUser();
+        //     answerArray22.push(watchList[y]);
+        //     res1.data.user.likes = answerArray22.push(watchList[y]);
+        //     // currUser.likes = answerArray;
+        //     PetService.setUser(res1.data.user);
+
+        //   }
+           res1.data.user.likes = answerArray22;
+           PetService.setUser(res1.data.user);
+          // alert('got user');
+          // $state.go('app.login');
+        // }
+            // alert($scope.watchList[]);
+            // alert($scope.watchList.indexOf(res1.data.user.likes[y]));
+          }).then(function(){
+            $state.go('app.login');
+              // alert('done');
+              // alert(PetService.getUser().likes[0].watchName);
+            });
+          // res1.data.user.likes = answerArray;
+          // res1.data.user.likes = [];
+
           // $scope.watchList = res1.data.watchList.watchesIndex;
          // alert(res1.data.watchList.watchesIndex);
-       });
+       // });
   };
 
   $scope.joinDimepiece = function(){

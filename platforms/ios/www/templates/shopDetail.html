@@ -50,6 +50,21 @@
 
               <!-- <div class = " "> -->
                 <a class="button unMenu33 icon-right ion-ios7-arrow-right" ng-click="goAmazon(singleShopWatch.watchLink)">{{singleShopWatch.watchPrice}} on Amazon Prime</a>
+
+                   <div ng-if="singleShopWatch.watchLikes.length>0" class="watchLikeSection">
+                  <p>{{singleShopWatch.watchLikes.length}} likes</p>
+                  <div ng-if="hasPics(singleShopWatch.watchLikes)>0" ng-repeat="like in singleShopWatch.watchLikes | filter:hasUserPic | limitTo:4">
+                    <img ng-if="like.userPic.length>0" class="profImg floatLeft" ng-src="data:image/jpg;base64,{{like.userPic}}">
+                  </div>
+                  <div ng-if="hasPics(singleShopWatch.watchLikes)<4" ng-repeat="like in singleShopWatch.watchLikes | filter:hasNoUserPic | limitTo: hasPics2(singleShopWatch.watchLikes)">
+                    <a ng-if="like.userPic.length==0" class="floatLeft gray ion-android-image"></a>
+                  </div>
+
+
+                     <div ng-if="singleShopWatch.watchLikes.length>4" class="watchLikeExtra">
+                  +{{singleShopWatch.watchLikes.length-4}}
+                </div>
+                </div>
                 <!-- <div class="ion-ios7-arrow-right">{{singleWatch.watchPrice}} on Amazon Prime -->
                   <!-- <div  class="ion-ios7-arrow-right priceArrow"></div> -->
 

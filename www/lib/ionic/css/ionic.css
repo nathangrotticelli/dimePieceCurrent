@@ -2497,7 +2497,7 @@ ion-infinite-scroll {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: white;
   overflow: hidden; }
 
 ion-nav-view {
@@ -2508,7 +2508,7 @@ ion-nav-view {
   /*left: 0;*/
   /*width: 100%;*/
   /*height: 100%;*/
-  background-color: transparent;
+  background-color: transparent!important;
 }
 
 /**

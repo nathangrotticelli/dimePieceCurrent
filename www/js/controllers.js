@@ -345,8 +345,8 @@ $scope.closeMe = function(){
     });
   };
 
-  $scope.getUser= function(){
-     $http.post('http://stark-eyrie-6720.herokuapp.com/getUser',
+  $scope.getUser22= function(){
+     $http.post('http://stark-eyrie-6720.herokuapp.com/getUser22',
           {testInfo: 'testInfo recieved'}).then(function (res1) {
           // alert(res1.data.watchList.listName);
 
@@ -384,6 +384,54 @@ $scope.profPic = PetService.getProfPic();
 $scope.goAmazon = function(link){
   window.open(link,"_system");
 };
+
+$scope.hasPics = function(watchLikes){
+  var countAns = 0;
+  for(x=0;x<watchLikes.length;x++){
+    if(watchLikes[x].userPic.length>0){
+      countAns++;
+    }
+  }
+  return countAns;
+}
+$scope.hasPics2 = function(watchLikes){
+  var countAns = 0;
+  for(x=0;x<watchLikes.length;x++){
+    if(watchLikes[x].userPic.length>0){
+      countAns++;
+    }
+  }
+  return (4-countAns);
+  // if(countAns>4){
+    // var x12 = ;
+    // return 2;
+  // }
+  // else{
+    // alert(x12);
+    // if(countAns>4){
+    //   return 0;
+    // }else{
+
+    // }
+  // }
+}
+
+$scope.hasUserPic = function(like){
+  if(like.userPic.length>0){
+    // $scope.likesDis++;
+    // alert(like);
+    return like;
+  }
+};
+$scope.hasNoUserPic = function(like){
+  if(like.userPic.length==0){
+    // $scope.likesDis++;
+    // alert(like);
+    return like;
+  }
+};
+// $scope.like
+
 
 $scope.goCat = function(link,catName,catTag){
         // PetService.setShopSingle($scope.watchEx);
@@ -612,8 +660,8 @@ $scope.watchCat = function(watch){
    });
 }
     $scope.logUserOut= function() {
-      PetService.setUser(false);
-      PetService.setUserPic("");
+      PetService.logOut();
+      // PetService.setUserPic("");
       $state.go('app.login');
     };
 

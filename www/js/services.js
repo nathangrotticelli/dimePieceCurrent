@@ -316,20 +316,29 @@ angular.module('sociogram.services', [])
                 return newUser;
             },
              logOut: function () {
-                events = {};
+                // events = {};
                 single = {};
-                privateList = {};
-                userItem = {};
-                school = "";
-                unFriends = [];
+                singleShop = {};
+                singleProfile = {};
+                userItem = false;
+                profileView = true;
+                userPic = '';
+                catHead = '';
+                catTag = '';
+                profilePic = '';
+                // singleView = false;
+                // privateList = {};
+                // userItem = {};
+                // school = "";
+                // unFriends = [];
                 // var userProfId = "";
-                newUser = "no";
+                // newUser = "no";
                 // newNot = false;
-                tinderView = false;
-                singleView = false;
-                startCard = true;
-                cards = ["start"];
-                followCount = 0;
+                // tinderView = false;
+                // singleView = false;
+                // startCard = true;
+                // cards = ["start"];
+                // followCount = 0;
             },
              refreshWatches: function(value) {
                 var newWatchList = [];

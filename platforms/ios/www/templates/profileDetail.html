@@ -51,12 +51,19 @@
               <!-- <div class = " "> -->
                 <a class="button unMenu33 icon-right ion-ios7-arrow-right" ng-click="goAmazon(singleProfileWatch.watchLink)">{{singleProfileWatch.watchPrice}} on Amazon Prime</a>
 
-                <div ng-if="singleProfileWatch.watchLikes.length>0" class="watchLikeSection">
-                  {{singleProfileWatch.watchLikes.length}} likes
-                  <div ng-repeat="like in singleProfileWatch.watchLikes | limitTo: 5">
-                    <img ng-if="like.userPic.length==0" class="profSpot ion-image">
-                    <img ng-if="like.userPic.length>0" class="profImg" ng-src="data:image/jpg;base64,{{like.userPic}}">
+          <div ng-if="singleProfileWatch.watchLikes.length>0" class="watchLikeSection">
+                  <p>{{singleProfileWatch.watchLikes.length}} likes</p>
+                  <div ng-if="hasPics(singleProfileWatch.watchLikes)>0" ng-repeat="like in singleProfileWatch.watchLikes | filter:hasUserPic | limitTo:4">
+                    <img ng-if="like.userPic.length>0" class="profImg floatLeft" ng-src="data:image/jpg;base64,{{like.userPic}}">
                   </div>
+                  <div ng-if="hasPics(singleProfileWatch.watchLikes)<4" ng-repeat="like in singleProfileWatch.watchLikes | filter:hasNoUserPic | limitTo: hasPics2(singleProfileWatch.watchLikes)">
+                    <a ng-if="like.userPic.length==0" class="floatLeft gray ion-android-image"></a>
+                  </div>
+
+
+                     <div ng-if="singleProfileWatch.watchLikes.length>4" class="watchLikeExtra">
+                  +{{singleProfileWatch.watchLikes.length-4}}
+                </div>
                 </div>
                 <!-- <div class="ion-ios7-arrow-right">{{singleWatch.watchPrice}} on Amazon Prime -->
                   <!-- <div  class="ion-ios7-arrow-right priceArrow"></div> -->
